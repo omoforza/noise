@@ -22,6 +22,6 @@ class laser
 		const double C = 299792458.0;
 		double LAMBDA;
 		double X;
-}
+};
 
 #endif

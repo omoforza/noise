@@ -12,8 +12,8 @@ class electric_field
 		//x is the position relative to the origin in meters
 		//t is time 
 		electric_field(double a = 1.0, double phi = 0.0,
-				double freq = 100.0, double x, double t) :
-			A(a), PHI(phi), FREQ(freq)
+				double freq = 100.0, double x = 0.0, double t = 0.0) :
+			A(a), PHI(phi), FREQ(freq), X(x), T(t)
 		{
 
 		}
@@ -29,13 +29,13 @@ class electric_field
 			double IM 	= ef.IM;
 		}
 		
-		double GetA()	{return A};
-		double GetPhi()	{return PHI};
+		double GetA()	{return A;}
+		double GetPhi()	{return PHI;}
 
-		void SetA(double a)		{A = a};
-		void SetPhi(double phi)		{PHI = phi};
-		void SetFreq(double freq)	{FREQ = freq};
-		void SetX(double x)	{FREQ = X};
+		void SetA(double a)		{A = a;}
+		void SetPhi(double phi)		{PHI = phi;}
+		void SetFreq(double freq)	{FREQ = freq;}
+		void SetX(double x)	{FREQ = X;}
 
 		double Intensity();
 
@@ -47,6 +47,6 @@ class electric_field
 		double IM;
 		double X;
 		double T;
-}
+};
 
 #endif

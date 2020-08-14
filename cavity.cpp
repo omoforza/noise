@@ -1,5 +1,6 @@
 #include"cavity.h"
 #include"mirror.h"
+#include<cmath>
 
 void cavity::Init()
 {

@@ -1,7 +1,7 @@
 #ifndef MIRROR_H
 #define MIRROR_H
 
-#include<electric_field.h>
+#include"electric_field.h"
 
 class mirror
 {
@@ -13,24 +13,25 @@ class mirror
 		mirror(double r = 0.5, double phir = 0.0, double at = 0.0,
 		double ar = 0.0, double t = 0.5, double phit = 0.0, 
 		double x = 0.0):
-			R(r), PHIR(phi), AT(at), AR(ar), PHIT (phit),
+			R(r), PHIR(phir), AT(at), AR(ar), PHIT (phit),
 		       	T(t), X(x)
 		{
 			
 		}
-		void reflect (electric field &);
-		void transmit(electric field &);
+		void reflect (electric_field &);
+		void transmit(electric_field &);
 
-		double GetX(){return X};
+		double GetX(){return X;}
 
 	private:
 		double R;
 		double PHIR;
 		double PHIT;
-		double A;
+		double AT;
+		double AR;
 		double T;
 		double X;
-}
+};
 
 
 #endif

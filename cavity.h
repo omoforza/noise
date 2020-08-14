@@ -19,6 +19,6 @@ class cavity
 		//cavity length L is defined as the distance between
 		//the two mirror M1 and M2
 		double L;
-}
+};
 
 #endif
