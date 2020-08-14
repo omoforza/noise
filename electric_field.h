@@ -1,7 +1,7 @@
-//Definition of the electric field
+//Definition of the electric field probe fixed in space
 
-#ifndef HPF_H
-#define HPF_H
+#ifndef ELECTRIC_FIELD_H
+#define ELECTRIC_FIELD_H
 
 class electric_field
 {
@@ -12,20 +12,26 @@ class electric_field
 		{
 
 		}
+		
+		~electric_field() {}
+
+		electric_field (electric_field & ef)
+		{
+			double A	= ef.A;
+			double PHI	= ef.PHI;
+			double FREQ 	= ef.FREQ;
+			double RE 	= ef.RE;
+			double IM 	= ef.IM;
+		}
 
 		double Intensity();
-
-
-
-		
-
-
 
 	private:
 		double A;
 		double PHI;
 		double FREQ;
-
+		double RE;
+		double IM;
 }
 
 #endif
