@@ -2,6 +2,7 @@
 #define CAVITY_H
 
 #include"mirror.h"
+#include"electric_field.h"
 
 class cavity
 {
@@ -11,6 +12,9 @@ class cavity
 		{
 			Init();
 		}
+		~cavity() {}
+
+		void GetEF(laser &);
 	private:
 		//class initialization function
 		void Init();
@@ -19,6 +23,19 @@ class cavity
 		//cavity length L is defined as the distance between
 		//the two mirror M1 and M2
 		double L;
+		//this field corresponds to the right moving
+		// internal field (laser ---->>> cavity)
+		electric_field Eplus(0.0,0.0,0.0,0.0,0.0);
+		//this is the field reflected by the cavity
+		electric_field Erefl(0.0,0.0,0.0,0.0,0.0);
+		//this is the incident field: just before touching
+		//the first mirror
+		electric_field Einc(0.0,0.0,0.0,0.0,0.0);
+
+		//the cavity is the clock ticking the time of the
+		//simulation. The roundtrip of radiation is our variable
+		//deltaT
+		double TIME = 0.0;
 };
 
 #endif
