@@ -14,7 +14,7 @@ class cavity
 		}
 		~cavity() {}
 
-		void GetEF(laser &);
+		void GetNewEF(laser &);
 	private:
 		//class initialization function
 		void Init();

@@ -16,18 +16,23 @@ class laser
 			FREQ = C/lambda;
 			PI = acos(-1.0);
 			OMEGA = 2.0*PI*FREQ;
+			K = 2.0*PI/LAMBDA
 
 		}
 		~laser() {}
 
 		double GetIntensity() {return INTENSITY;}
-		double Get
+		
+		//this function give the electric field in x at time t
+		//the field was emitted by the laser at time t - x/c
+		void GetField(electric_field &, double x, double t);
 
 	private:
 		double FREQ;
 		const double PI;
 		const double C = 299792458.0;
 		double LAMBDA;
+		double K;
 		double OMEGA;
 		double X;
 		double INTENSITY;

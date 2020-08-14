@@ -33,7 +33,6 @@ class electric_field
 	private:
 		double A;
 		double PHI;
-		double FREQ;
 };
 
 #endif

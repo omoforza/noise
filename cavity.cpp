@@ -8,7 +8,7 @@ void cavity::Init()
 	L = abs( M1.GetX() - M2.GetX() );
 }
 
-void GetEF(laser & las)
+void cavity::GetNewEF(laser &)
 {
-	Einc->SetA();
+	
 }
