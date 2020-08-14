@@ -32,8 +32,10 @@ class electric_field
 		double GetA()	{return A};
 		double GetPhi()	{return PHI};
 
-		void SetA(double a)	{A = a};
-		void SetPhi(double phi)	{PHI = phi};
+		void SetA(double a)		{A = a};
+		void SetPhi(double phi)		{PHI = phi};
+		void SetFreq(double freq)	{FREQ = freq};
+		void SetX(double x)	{FREQ = X};
 
 		double Intensity();
 
@@ -43,6 +45,8 @@ class electric_field
 		double FREQ;
 		double RE;
 		double IM;
+		double X;
+		double T;
 }
 
 #endif
