@@ -3,12 +3,13 @@
 
 #include"mirror.h"
 #include"electric_field.h"
+#include"laser.h"
 
 class cavity
 {
 	public:
 		//a cavity is defined by two mirrors
-		cavity(mirror m1, mirror m2) : M1(m1), M2(m2)
+		cavity(mirror & m1, mirror & m2) : M1(m1), M2(m2)
 		{
 			Init();
 		}
@@ -25,12 +26,12 @@ class cavity
 		double L;
 		//this field corresponds to the right moving
 		// internal field (laser ---->>> cavity)
-		electric_field Eplus(0.0,0.0,0.0,0.0,0.0);
+		electric_field Eplus;
 		//this is the field reflected by the cavity
-		electric_field Erefl(0.0,0.0,0.0,0.0,0.0);
+		electric_field Erefl;
 		//this is the incident field: just before touching
 		//the first mirror
-		electric_field Einc(0.0,0.0,0.0,0.0,0.0);
+		electric_field Einc;
 
 		//the cavity is the clock ticking the time of the
 		//simulation. The roundtrip of radiation is our variable

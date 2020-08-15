@@ -8,7 +8,7 @@ class electric_field
 	public:
 		//A and PHI are the field amplitude and phase
 		//|A|exp(i(PHI))
-		electric_field(double a = 1.0, double phi = 0.0) :
+		electric_field(double a = 0.0, double phi = 0.0) :
 			A(a), PHI(phi)
 		{
 

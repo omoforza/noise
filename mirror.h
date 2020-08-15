@@ -18,8 +18,20 @@ class mirror
 		{
 			
 		}
-		electric_field reflect (electric_field);
-		electric_field transmit(electric_field);
+		~mirror() {}
+		mirror (mirror & m)
+		{
+			double R 	= m.R;
+			double PHIR 	= m.PHIR;
+			double PHIT 	= m.PHIT;
+			double AT 	= m.AT;
+			double AR 	= m.AR;
+			double T 	= m.T;
+			double X 	= m.X;
+			
+		}
+		void reflect (electric_field &);
+		void transmit(electric_field &);
 
 		double GetX(){return X;}
 
