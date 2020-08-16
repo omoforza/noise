@@ -9,8 +9,10 @@ class cavity
 {
 	public:
 		//a cavity is defined by two mirrors
-		cavity(mirror & m1, mirror & m2) : M1(m1), M2(m2)
+		cavity(mirror m1, mirror m2)
 		{
+			M1 = m1;
+			M2 = m2;
 			Init();
 		}
 		~cavity() {}

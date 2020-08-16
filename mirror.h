@@ -19,21 +19,23 @@ class mirror
 			
 		}
 		~mirror() {}
-		mirror (mirror & m)
+		mirror (const mirror & m)
 		{
-			double R 	= m.R;
-			double PHIR 	= m.PHIR;
-			double PHIT 	= m.PHIT;
-			double AT 	= m.AT;
-			double AR 	= m.AR;
-			double T 	= m.T;
-			double X 	= m.X;
+			R 	= m.R;
+			PHIR 	= m.PHIR;
+			PHIT 	= m.PHIT;
+			AT 	= m.AT;
+			AR 	= m.AR;
+			T 	= m.T;
+			X 	= m.X;
 			
 		}
-		void reflect (electric_field &);
-		void transmit(electric_field &);
+		electric_field reflect (electric_field);
+		electric_field transmit(electric_field);
 
 		double GetX(){return X;}
+		double GetPhir() {return PHIR;}
+		void SetPhir(double phi) {PHIR = phi;}
 
 	private:
 		double R;

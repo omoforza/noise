@@ -22,6 +22,20 @@ void cavity::Init()
 
 void cavity::GetNewEF(laser & las)
 {
-	las.GetField(Einc, M1.GetX(), TIME);
-	cout << "OK!" << endl;
+	//The new Einc field is defined on the outer layer of
+	//the first mirror
+	las.GetField(Einc, M1.GetX() - las.GetX(), TIME);
+	//Using Einc it is possible to define Erefl using the
+	//properties of the mirror
+	Erefl = M1.reflect(Einc);
+
+
+	cout << "L = " << L << endl;
+	cout << "Einc:  A  = " << Einc.GetA() << endl;
+	cout << "Einc:  Phi= " << Einc.GetPhi() << endl;
+	cout << "Erefl: A  = " << Erefl.GetA() << endl;
+	cout << "Erefl: Phi= " << Erefl.GetPhi() << endl;
+	cout << "M1: Phir =  " << M1.GetPhir() << endl;
+
+
 }

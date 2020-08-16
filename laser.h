@@ -24,7 +24,9 @@ class laser
 		
 		//this function give the electric field in x at time t
 		//the field was emitted by the laser at time t - x/c
-		void GetField(electric_field &, double x, double t);
+		void GetField(electric_field &, double dist, double t);
+
+		double GetX() {return X;}
 
 	private:
 		double FREQ;
