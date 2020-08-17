@@ -18,6 +18,9 @@ class cavity
 		~cavity() {}
 
 		void GetNewEF(laser &);
+
+		electric_field GetErefl(){return Erefl;}
+		double GetTime(){return TIME;}
 	private:
 		//class initialization function
 		void Init();
@@ -42,6 +45,8 @@ class cavity
 		//simulation. The roundtrip of radiation is our variable
 		//deltaT
 		double TIME = 0.0;
+
+		const double C = 299792458.0;
 };
 
 #endif

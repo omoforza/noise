@@ -11,11 +11,6 @@ void laser::GetField(electric_field & ef, double dist, double t)
 	double phi = K*dist - OMEGA*(t - dist/(2.0*C));
 	//intensity of the field
 	double In = INTENSITY;
-
-	cout << "K = " << K << endl;
-	cout << "OMEGA = " << OMEGA << endl;
-	cout << "dist = " << dist << endl;
-	
 	ef.SetA  (In);
 	ef.SetPhi(phi);
 }

@@ -30,6 +30,7 @@ class electric_field
 
 		double Intensity();
 
+		//overloading of the + operator
 		friend electric_field operator + 
 			(const electric_field &, const electric_field &);
 

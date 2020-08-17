@@ -12,6 +12,7 @@ double electric_field::Intensity()
 }
 
 
+//overloading of the + operator
 electric_field operator + (const electric_field &  ef1,
                                 const electric_field & ef2)
 {

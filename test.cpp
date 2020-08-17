@@ -4,9 +4,11 @@
 #include"laser.h"
 #include<iostream>
 #include<cmath>
+#include<fstream>
 
 using std::endl;
 using std::cout;
+using std::ofstream;
 
 int main()
 {
@@ -21,15 +23,22 @@ mirror m1{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 0.1};
 mirror m2{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 1.1};
 
 //creazione della cavità
-cavity * cav = new cavity(m1,m2);
+cavity cav{m1,m2};
 
-cav->GetNewEF(las);
-
-electric_field ef1{1,0};
-electric_field ef2{2,0};
-electric_field sum;
-sum = ef1 + ef2;
-cout << "sum_ef = " << sum.GetA() << "   " << sum.GetPhi() << endl;
+electric_field ef;
+double intensity;
+double time;
+ofstream file;
+file.open("data.txt");
+for(int i=0; i<1000; i++)
+{
+	cav.GetNewEF(las);
+	ef = cav.GetErefl();
+	intensity = ef.Intensity();
+	time = cav.GetTime();
+	file << intensity << time << endl;
+}
+file.close();
 
 return 0;
 }
