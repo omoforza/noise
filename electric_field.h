@@ -30,6 +30,9 @@ class electric_field
 
 		double Intensity();
 
+		friend electric_field operator + 
+			(const electric_field &, const electric_field &);
+
 	private:
 		double A;
 		double PHI;

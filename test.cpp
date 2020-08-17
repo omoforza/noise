@@ -25,5 +25,11 @@ cavity * cav = new cavity(m1,m2);
 
 cav->GetNewEF(las);
 
+electric_field ef1{1,0};
+electric_field ef2{2,0};
+electric_field sum;
+sum = ef1 + ef2;
+cout << "sum_ef = " << sum.GetA() << "   " << sum.GetPhi() << endl;
+
 return 0;
 }

@@ -29,6 +29,10 @@ void cavity::GetNewEF(laser & las)
 	//properties of the mirror
 	Erefl = M1.reflect(Einc);
 
+	//eplus
+	etemp = M2.reflect(Eplus);
+	Eplus = M1.transmit(Einc) + M1.reflect(etemp);
+
 
 	cout << "L = " << L << endl;
 	cout << "Einc:  A  = " << Einc.GetA() << endl;

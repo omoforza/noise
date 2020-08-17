@@ -34,6 +34,9 @@ class cavity
 		//this is the incident field: just before touching
 		//the first mirror
 		electric_field Einc;
+		
+		//temporary electric field for internal use
+		electric_field etemp;
 
 		//the cavity is the clock ticking the time of the
 		//simulation. The roundtrip of radiation is our variable
