@@ -4,12 +4,14 @@
 
 electric_field mirror::reflect(electric_field & ef)
 {
-	ef.SetA(ef.GetA()*R*(-1.0));	
-	return ef;
+	electric_field er;
+	er.SetA(ef.GetA()*R*(-1.0));	
+	return er;
 }
 
 electric_field mirror::transmit(electric_field & ef)
 {
-	ef.SetA(ef.GetA()*T*sqrt(AT));	
-	return ef;
+	electric_field et;
+	et.SetA(ef.GetA()*T*sqrt(AT));	
+	return et;
 }
