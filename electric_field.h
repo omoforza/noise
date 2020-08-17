@@ -3,6 +3,9 @@
 #ifndef ELECTRIC_FIELD_H
 #define ELECTRIC_FIELD_H
 
+#include<iostream>
+using std::ostream;
+
 class electric_field
 {
 	public:
@@ -33,6 +36,10 @@ class electric_field
 		//overloading of the + operator
 		friend electric_field operator + 
 			(const electric_field &, const electric_field &);
+
+		//overloading of the << operator
+		friend ostream & operator <<
+			(ostream &, electric_field);
 
 	private:
 		double A;

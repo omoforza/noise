@@ -26,7 +26,8 @@ mirror m2{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 1.1};
 cavity cav{m1,m2};
 
 electric_field ef;
-double intensity;
+double ir;
+double ip;
 double time;
 ofstream file;
 file.open("data.txt");
@@ -34,11 +35,15 @@ for(int i=0; i<1000; i++)
 {
 	cav.GetNewEF(las);
 	ef = cav.GetErefl();
-	intensity = ef.Intensity();
+	ir = ef.Intensity();
+	ef = cav.GetEplus();
+	ip = ef.Intensity();
 	time = cav.GetTime();
-	file << intensity << time << endl;
+	file << ir << "\t" << ip << "\t" << time << endl;
 }
 file.close();
+
+cout << ef<< endl;
 
 return 0;
 }

@@ -20,6 +20,7 @@ class cavity
 		void GetNewEF(laser &);
 
 		electric_field GetErefl(){return Erefl;}
+		electric_field GetEplus(){return Eplus;}
 		double GetTime(){return TIME;}
 	private:
 		//class initialization function
