@@ -26,15 +26,26 @@ mirror m2{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 1.1};
 cavity cav{m1,m2};
 
 
-electric_field e1, e2, esum;
+electric_field ef1, ef2, sum;
 
-e1.SetA(1.0);
-e1.SetPhi(0.0);
-e2.SetA(1.0);
-e2.SetPhi(PI);
+ef1.SetA(1.0);
+ef2.SetA(1.0);
+ef1.SetPhi(0.0);
+ef2.SetPhi(PI);
 
-cout << e1 << endl;
-cout << e2 << endl;
+cout << ef1 <<"\t" << ef1.GetA() << "\t"<< ef1.GetPhi() << endl;
+cout << ef2 << endl;
+cout << sum << endl;
+
+sum = ef1 + ef2;
+
+cout << "dopo la somma"<< endl;
+cout << ef1 << endl;
+cout << ef2 << endl;
+cout << sum << endl;
+
+
+
 
 
 return 0;

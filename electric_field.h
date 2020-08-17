@@ -39,7 +39,7 @@ class electric_field
 
 		//overloading of the << operator
 		friend ostream & operator <<
-			(ostream &, electric_field);
+			(ostream &, electric_field &);
 
 	private:
 		double A;
