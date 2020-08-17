@@ -20,11 +20,17 @@ void cavity::Init()
 	Einc.SetPhi (0.0);
 }
 
+void cavity::AssignLaser(laser & las)
+{
+	D0 = M1.GetX() - las.GetX();
+	cout << "The distance at equilibrium is = " << D0 << endl;
+}
+
 void cavity::GetNewEF(laser & las)
 {
 	//The new Einc field is defined on the outer layer of
 	//the first mirror
-	las.GetField(Einc, M1.GetX() - las.GetX(), TIME);
+	las.GetField(Einc, (M1.GetX()-las.GetX()) - D0, TIME);
 
 	//eplus
 	etemp = M2.reflect(Eplus);

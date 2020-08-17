@@ -24,7 +24,9 @@ class laser
 		
 		//this function give the electric field in x at time t
 		//the field was emitted by the laser at time t - x/c
-		void GetField(electric_field &, double dist, double t);
+		//d is the difference in lenght between the laser and the
+		//first mirror of the setup from the equilibrium position
+		void GetField(electric_field &, double d, double t);
 
 		double GetX() {return X;}
 

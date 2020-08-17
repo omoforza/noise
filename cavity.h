@@ -3,6 +3,7 @@
 
 #include"mirror.h"
 #include"electric_field.h"
+#include"cavity.h"
 #include"laser.h"
 
 class cavity
@@ -19,10 +20,16 @@ class cavity
 
 		void GetNewEF(laser &);
 
+		//assign a laser to the cavity
+		void AssignLaser(laser &);
+
 		electric_field GetErefl(){return Erefl;}
 		electric_field GetEplus(){return Eplus;}
 		double GetTime(){return TIME;}
 	private:
+		//distance at equilibrium between laser and first mirror
+		//of the cavity
+		double D0 = 0.0;
 		//class initialization function
 		void Init();
 		mirror M1;
