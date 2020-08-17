@@ -13,7 +13,7 @@ using std::ofstream;
 int main()
 {
 
-const double PI = acos(-1.0);	
+const long double PI = acos(-1.0);	
 
 laser las;
 
@@ -28,13 +28,16 @@ cavity cav{m1,m2};
 
 electric_field e1, e2, esum;
 
-e1.SetA(1.0);
-e1.SetPhi(0.0);
-e2.SetA(1.0);
+e1.SetA(1.0L);
+e1.SetPhi(0.0L);
+e2.SetA(1.0L);
 e2.SetPhi(PI);
+
+esum = e1 + e2;
 
 cout << e1 << endl;
 cout << e2 << endl;
+cout << esum << endl;
 
 
 return 0;
