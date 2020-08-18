@@ -19,10 +19,10 @@ class electric_field
 		
 		~electric_field() {}
 
-		electric_field (electric_field & ef)
+		electric_field (const electric_field & ef)
 		{
-			double A	= ef.A;
-			double PHI	= ef.PHI;
+			A	= ef.A;
+			PHI	= ef.PHI;
 		}
 		
 		double GetA()	{return A;}
