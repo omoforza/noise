@@ -25,8 +25,8 @@ class electric_field
 			PHI	= ef.PHI;
 		}
 		
-		double GetA()	{return A;}
-		double GetPhi()	{return PHI;}
+		double GetA() const	{return A;} 
+		double GetPhi() const	{return PHI;}
 
 		void SetA(double a)		{A = a;}
 		void SetPhi(double phi)		{PHI = phi;}
@@ -39,7 +39,7 @@ class electric_field
 
 		//overloading of the << operator
 		friend ostream & operator <<
-			(ostream &, electric_field &);
+			(ostream &, electric_field);
 
 	private:
 		double A;

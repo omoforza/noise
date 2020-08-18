@@ -22,45 +22,26 @@ laser las;
 mirror m1{0.5, PI, 0.0, 0.0, sqrt(1.0-0.5*0.5), 0.0, 0.1};
 mirror m2{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 1.1};
 
+
 //creazione della cavità
 cavity cav{m1,m2};
 cav.AssignLaser(las);
 ofstream out;
 out.open("data.txt");
+
+
 double time;
 double intensity;
 electric_field ef;
 
-
-for(int i=0; i<10; i++)
+for(int i=0; i<3; i++)
 {
 	cav.GetNewEF(las);
-	ef = cav.GetEinc();
+	ef = cav.GetEplus();
 	intensity = ef.Intensity();
 	time = cav.GetTime();
-	//out << time << "\t" << intensity << endl;
-	cout << "Test.cpp Einc : " << ef << endl;
 }	
 out.close();
 
-//test di Intensity
-/*
-electric_field efi;
-electric_field efr;
-
-efi.SetA(1.0);
-efi.SetPhi(0.0);
-
-efr = m1.reflect(efi);
-
-
-double inti = efi.Intensity();
-double intr = efr.Intensity();
-
-cout << "efi  : " << efi << endl;
-cout << "inti : " << inti << endl;
-cout << "efr  : " << efr << endl;
-cout << "intr : " << intr << endl;
-*/
 return 0;
 }

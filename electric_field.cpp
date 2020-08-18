@@ -17,12 +17,13 @@ double electric_field::Intensity()
 
 
 //overloading of the + operator
-electric_field operator + (const electric_field &  ef1,
-                                const electric_field & ef2)
+electric_field operator + (const electric_field & ef1, 
+		const electric_field & ef2)
 {
 	electric_field esum;
 	complex<double> sum;
-	sum = polar(ef1.A, ef1.PHI) + polar(ef2.A, ef2.PHI);
+	sum = polar(ef1.GetA(), ef1.GetPhi()) + 
+		polar(ef2.GetA(), ef2.GetPhi());
 
 	esum.SetA(abs(sum));
 	esum.SetPhi(arg(sum));
@@ -30,7 +31,7 @@ electric_field operator + (const electric_field &  ef1,
 }
 
 
-ostream & operator <<(ostream & out, electric_field & ef)
+ostream & operator <<(ostream & out, electric_field ef)
 {
 	out << "A = " << ef.GetA() << "; PHI = " << ef.GetPhi() ;
 	return out;

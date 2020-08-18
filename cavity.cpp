@@ -23,7 +23,6 @@ void cavity::Init()
 void cavity::AssignLaser(laser & las)
 {
 	D0 = M1.GetX() - las.GetX();
-	cout << "The distance at equilibrium is = " << D0 << endl;
 }
 
 void cavity::GetNewEF(laser & las)
@@ -31,10 +30,11 @@ void cavity::GetNewEF(laser & las)
 	//The new Einc field is defined on the outer layer of
 	//the first mirror
 	Einc = las.GetField((M1.GetX()-las.GetX()) - D0, TIME);
-	cout << "Cavity Einc : " << Einc << endl;
+	cout << "Einc cav : "<< Einc << endl;
 
 	//eplus
 	etemp = M2.reflect(Eplus);
+	cout << "EincTr   : "<< M1.transmit(Einc) << endl;
 	Eplus = M1.transmit(Einc) + M1.reflect(etemp);
 
 	//Using Einc it is possible to define Erefl using the
