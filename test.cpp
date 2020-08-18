@@ -25,12 +25,13 @@ mirror m2{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 1.1};
 //creazione della cavità
 cavity cav{m1,m2};
 cav.AssignLaser(las);
-
+cout << "TEST" << endl;
 ofstream out;
 out.open("data.txt");
 double time;
 double intensity;
 electric_field ef;
+
 
 for(int i=0; i<10; i++)
 {
