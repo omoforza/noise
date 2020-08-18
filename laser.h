@@ -1,6 +1,7 @@
 #ifndef LASER_H
 #define LASER_H
 
+#include"cavity.h"
 #include"electric_field.h"
 #include<cmath>
 
@@ -13,12 +14,16 @@ class laser
 		      double intensity = 1.0) :
 			LAMBDA(lambda), X(x), INTENSITY(intensity)
 		{
-			FREQ = C/lambda;
-			OMEGA = 2.0*PI*FREQ;
-			K = 2.0*PI/LAMBDA;
-
+			Init();
 		}
 		~laser() {}
+
+
+		void SetFreq(double freq)
+		{
+			FREQ = freq;
+			Init();
+		}
 
 		double GetIntensity() {return INTENSITY;}
 		
@@ -30,7 +35,12 @@ class laser
 
 		double GetX() {return X;}
 
+		//rampa is used to obtain the reflected intensity of
+		//a cavity as a function of laser frequency
+		void rampa(cavity, double, double);
+
 	private:
+		void Init();
 		double FREQ;
 		const double PI = acos(-1.0);
 		const double C = 299792458.0;

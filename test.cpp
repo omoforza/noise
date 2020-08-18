@@ -19,7 +19,7 @@ laser las;
 
 //mirror * m1 = (double r = 0.5, double phir = 0.0, double at = 0.0, 
 //double ar = 0.0, double t = 0.5, double phit = 0.0, double x = 0.0)
-mirror m1{0.5, PI, 0.0, 0.0, sqrt(1.0-0.5*0.5), 0.0, 0.1};
+mirror m1{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 0.1};
 mirror m2{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 1.1};
 
 
@@ -37,12 +37,14 @@ electric_field ef;
 for(int i=0; i<1000; i++)
 {
 	cav.GetNewEF(las);
-	ef = cav.GetEplus();
+	ef = cav.GetErefl();
 	intensity = ef.Intensity();
 	time = cav.GetTime();
 	out << time << "\t" << intensity << endl;
 }	
 out.close();
+
+las.rampa(cav, 2.81759829e14, 2.81231199e14);
 
 return 0;
 }

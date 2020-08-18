@@ -29,6 +29,10 @@ class cavity
 		electric_field GetErefl(){return Erefl;}
 		electric_field GetEplus(){return Eplus;}
 		double GetTime(){return TIME;}
+
+		//cavity reset function: all fields are destroyed
+		void reset() {Init();}
+
 	private:
 		//distance at equilibrium between laser and first mirror
 		//of the cavity
