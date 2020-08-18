@@ -31,13 +31,15 @@ out.open("data.txt");
 double time;
 double intensity;
 electric_field ef;
+
 for(int i=0; i<10; i++)
 {
 	cav.GetNewEF(las);
-	ef = cav.GetEplus();
+	ef = cav.GetEinc();
 	intensity = ef.Intensity();
 	time = cav.GetTime();
-	out << time << "\t" << intensity << endl;
+	//out << time << "\t" << intensity << endl;
+	cout << "Test.cpp Einc : " << ef << endl;
 }	
 out.close();
 

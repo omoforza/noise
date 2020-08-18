@@ -30,7 +30,8 @@ void cavity::GetNewEF(laser & las)
 {
 	//The new Einc field is defined on the outer layer of
 	//the first mirror
-	las.GetField(Einc, (M1.GetX()-las.GetX()) - D0, TIME);
+	Einc = las.GetField((M1.GetX()-las.GetX()) - D0, TIME);
+	cout << "Cavity Einc : " << Einc << endl;
 
 	//eplus
 	etemp = M2.reflect(Eplus);

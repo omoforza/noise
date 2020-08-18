@@ -23,6 +23,9 @@ class cavity
 		//assign a laser to the cavity
 		void AssignLaser(laser &);
 
+		double GetL() {return L;}
+
+		electric_field GetEinc() {return Einc;}
 		electric_field GetErefl(){return Erefl;}
 		electric_field GetEplus(){return Eplus;}
 		double GetTime(){return TIME;}

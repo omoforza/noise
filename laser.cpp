@@ -5,12 +5,16 @@
 using std::cout;
 using std::endl;
 
-void laser::GetField(electric_field & ef, double d, double t)
+electric_field laser::GetField(double d, double t)
 {
+	double phi, In;
+	electric_field ef;
 	//phase of the emitted field when it reaches x at time t
-	double phi = K*d - OMEGA*(t - d/(2.0*C));
+	phi = K*d - OMEGA*(t - d/(2.0*C));
 	//intensity of the field
-	double In = INTENSITY;
-	ef.SetA  (In);
+	In = INTENSITY;
+	ef.SetA(In);
 	ef.SetPhi(phi);
+
+	return ef;
 }
