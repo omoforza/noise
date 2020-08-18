@@ -34,12 +34,13 @@ double time;
 double intensity;
 electric_field ef;
 
-for(int i=0; i<3; i++)
+for(int i=0; i<1000; i++)
 {
 	cav.GetNewEF(las);
 	ef = cav.GetEplus();
 	intensity = ef.Intensity();
 	time = cav.GetTime();
+	out << time << "\t" << intensity << endl;
 }	
 out.close();
 
