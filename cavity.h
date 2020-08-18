@@ -33,6 +33,10 @@ class cavity
 		//cavity reset function: all fields are destroyed
 		void reset() {Init();}
 
+		//rampa is used to obtain the reflected intensity of
+                //a cavity as a function of laser frequency
+                void rampa(laser &, double, double);
+
 	private:
 		//distance at equilibrium between laser and first mirror
 		//of the cavity
