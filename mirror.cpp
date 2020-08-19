@@ -8,7 +8,8 @@ using std::endl;
 electric_field mirror::reflect(electric_field ef)
 {
 	electric_field er;
-	er.SetA(ef.GetA()*R*(-1.0));	
+	er.SetA(ef.GetA()*R);	
+	er.SetPhi(ef.GetPhi() + PHIR);
 	return er;
 }
 
