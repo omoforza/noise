@@ -5,10 +5,12 @@
 #include<iostream>
 #include<fstream>
 #include<cmath>
+#include<iomanip>
 
 using std::cout;
 using std::endl;
 using std::ofstream;
+using std::setprecision;
 
 void cavity::Init()
 {
@@ -20,6 +22,7 @@ void cavity::Init()
 	Erefl.SetPhi(0.0);
 	Einc.SetA   (0.0);
 	Einc.SetPhi (0.0);
+	FSR = C/(2.0*L);
 }
 
 void cavity::AssignLaser(laser & las)
@@ -47,14 +50,33 @@ void cavity::GetNewEF(laser & las)
 
 
 //f1 ed f2 sono le frequenze iniziali e finali della rampa
-void cavity::rampa(laser & las, double f1, double f2)
+void cavity::rampa(laser & las)
 {
         AssignLaser(las);
         ofstream out;
         out.open("rampa.txt");
 
+	//laser frequency before rampa
+	const double freq0 = las.GetFreq();
+
+
+	//rampa will scan frequency around the nearer resonance frequency
+	double f_res;
+	//number of free spectral range
+	double nfsr = round(freq0/FSR);
+	cout << "nfsr = "<< nfsr << endl;
+	cout << "FSR = "<< FSR	<< endl;
+	f_res = FSR * nfsr;
+	cout << "FSR * nsfr = "<< FSR*nfsr	<< endl;
+
+	//freq boundariies of rampa
+	double f1,f2;
+
+	f1 = f_res - 1.0e6;
+	f2 = f_res + 1.0e6;
+
         //number of samples
-        int N = 100;
+        int N = 1000;
 
         //delta frequency
         double delta;
@@ -73,10 +95,13 @@ void cavity::rampa(laser & las, double f1, double f2)
                 }
                 ef = GetErefl();
                 ir = ef.Intensity();
-                out << las.GetFreq() << "\t" << ir << endl;
+                out <<setprecision(15) <<
+			las.GetFreq() << "\t" << ir << endl;
                 //cavity reset before new acquisition
                 reset();
         }
         out.close();
+	//laser frequency is set to the original frequency once again
+	las.SetFreq(freq0);
 }
 

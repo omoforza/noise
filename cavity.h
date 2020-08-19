@@ -35,7 +35,7 @@ class cavity
 
 		//rampa is used to obtain the reflected intensity of
                 //a cavity as a function of laser frequency
-                void rampa(laser &, double, double);
+                void rampa(laser &);
 
 	private:
 		//distance at equilibrium between laser and first mirror
@@ -64,6 +64,8 @@ class cavity
 		//simulation. The roundtrip of radiation is our variable
 		//deltaT
 		double TIME = 0.0;
+
+		double FSR;
 
 		const double C = 299792458.0;
 };

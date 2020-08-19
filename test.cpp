@@ -44,7 +44,7 @@ for(int i=0; i<1000; i++)
 }	
 out.close();
 
-cav.rampa(las, 2.7e14, 2.9e14);
+cav.rampa(las);
 
 return 0;
 }
