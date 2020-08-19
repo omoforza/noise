@@ -14,6 +14,7 @@ int main()
 {
 
 const double PI = acos(-1.0);	
+const double C = 299792458.0;
 
 laser las;
 
@@ -34,7 +35,13 @@ double time;
 double intensity;
 electric_field ef;
 
-for(int i=0; i<1000; i++)
+double fsr = C/(2.0*cav.GetL());
+double fres = round(las.GetFreq() / fsr)*fsr;
+double freq0 = las.GetFreq();
+
+las.SetFreq(fres);
+
+for(int i=0; i<10000; i++)
 {
 	cav.GetNewEF(las);
 	ef = cav.GetErefl();

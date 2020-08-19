@@ -25,7 +25,6 @@ electric_field laser::GetField(double d, double t)
 	In = INTENSITY;
 	ef.SetA(In);
 	ef.SetPhi(phi);
-
 	return ef;
 }
 

@@ -72,8 +72,8 @@ void cavity::rampa(laser & las)
 	//freq boundariies of rampa
 	double f1,f2;
 
-	f1 = f_res - 1.0e6;
-	f2 = f_res + 1.0e6;
+	f1 = f_res - FSR*0.5;
+	f2 = f_res + FSR*0.5;
 
         //number of samples
         int N = 1000;

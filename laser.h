@@ -21,7 +21,9 @@ class laser
 		void SetFreq(double freq)
 		{
 			LAMBDA = C/freq;
-			Init();
+			FREQ = freq;
+			OMEGA = 2.0*PI*freq;
+        		K = 2.0*PI/LAMBDA;
 		}
 
 		double GetIntensity() {return INTENSITY;}
