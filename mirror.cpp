@@ -19,5 +19,6 @@ electric_field mirror::transmit(electric_field ef)
 	double t_int;
 	t_int = ef.GetA()*T*sqrt(1.0-AT);
 	et.SetA(t_int);	
+	et.SetPhi(ef.GetPhi());	
 	return et;
 }
