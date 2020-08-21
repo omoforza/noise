@@ -42,7 +42,8 @@ void cavity::GetNewEF(laser & las)
 
 	//Using Einc it is possible to define Erefl using the
 	//properties of the mirror
-	Erefl = M1.reflect(Einc) + M1.transmit(etemp);
+	//aggiunto un meno arbitrario
+	Erefl = M1.reflect(Einc) - M1.transmit(etemp);
 
 	//update of the time variable
 	TIME = TIME + 2.0*L/C;
@@ -72,8 +73,8 @@ void cavity::rampa(laser & las)
 	//freq boundariies of rampa
 	double f1,f2;
 
-	f1 = f_res - FSR*0.5;
-	f2 = f_res + FSR*0.5;
+	f1 = f_res - FSR*0.1;
+	f2 = f_res + FSR*0.1;
 
         //number of samples
         int N = 1000;

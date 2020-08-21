@@ -30,6 +30,20 @@ electric_field operator + (const electric_field & ef1,
 	return esum;
 }
 
+//overloading of the - operator
+electric_field operator - (const electric_field & ef1, 
+		const electric_field & ef2)
+{
+	electric_field esum;
+	complex<double> sum;
+	sum = polar(ef1.GetA(), ef1.GetPhi()) - 
+		polar(ef2.GetA(), ef2.GetPhi());
+
+	esum.SetA(abs(sum));
+	esum.SetPhi(arg(sum));
+	return esum;
+}
+
 
 ostream & operator <<(ostream & out, electric_field ef)
 {

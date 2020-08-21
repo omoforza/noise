@@ -37,6 +37,10 @@ class electric_field
 		friend electric_field operator + 
 			(const electric_field &, const electric_field &);
 
+		//overloading of the - operator
+		friend electric_field operator - 
+			(const electric_field &, const electric_field &);
+
 		//overloading of the << operator
 		friend ostream & operator <<
 			(ostream &, electric_field);
