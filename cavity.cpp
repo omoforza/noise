@@ -14,7 +14,9 @@ using std::setprecision;
 
 void cavity::Init()
 {
+	//the initial distance between the two mirrors is obtained
 	L = abs( M1.GetX() - M2.GetX() );
+
 	//phase and amplitude of all fields are initially set to 0.0
 	Eplus.SetA  (0.0);
 	Eplus.SetPhi(0.0);
@@ -22,6 +24,8 @@ void cavity::Init()
 	Erefl.SetPhi(0.0);
 	Einc.SetA   (0.0);
 	Einc.SetPhi (0.0);
+
+	//the free spectral range frequency
 	FSR = C/(2.0*L);
 }
 
@@ -49,25 +53,24 @@ void cavity::GetNewEF(laser & las)
 }
 
 
-//f1 ed f2 sono le frequenze iniziali e finali della rampa
 void cavity::rampa(laser & las)
 {
         AssignLaser(las);
+
+	//output file to store data
         ofstream out;
         out.open("rampa.txt");
 
 	//laser frequency before rampa
 	const double freq0 = las.GetFreq();
 
-
 	//rampa will scan frequency around the nearer resonance frequency
 	double f_res;
-	//number of free spectral range
+	//number of time the free spectral range frequency fit into
+	//the laser frequency
 	double nfsr = round(freq0/FSR);
-	cout << "nfsr = "<< nfsr << endl;
-	cout << "FSR = "<< FSR	<< endl;
+	//we fix the nearest resonce to laser frequency
 	f_res = FSR * nfsr;
-	cout << "FSR * nsfr = "<< FSR*nfsr	<< endl;
 
 	//freq boundariies of rampa
 	double f1,f2;
@@ -89,6 +92,10 @@ void cavity::rampa(laser & las)
         for(int j=0; j<N; j++)
         {
                 las.SetFreq(f1 + delta*j);
+		//the cavity charge for 1000 round trip of light
+		//before the value of reflected field is stored
+		//this number SHOULD be adjusted depending on the
+		//reflectivity of mirrors
                 for(int i=0; i<1000; i++)
                 {
                         GetNewEF(las);
