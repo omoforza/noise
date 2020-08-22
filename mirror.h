@@ -30,12 +30,19 @@ class mirror
 			X 	= m.X;
 			
 		}
+		//every mirror can interact with an electrifield.
+		//In particular it can reflect, externally reflect and 
+		//transmit light. external reflection (interface from 
+		//higher n to lower. e.g. glass ---> air)
 		electric_field reflect (electric_field);
 		electric_field ex_reflect (electric_field);
 		electric_field transmit(electric_field);
 
+		//Getters
 		double GetX(){return X;}
 		double GetPhir() {return PHIR;}
+
+		//Setters
 		void SetPhir(double phi) {PHIR = phi;}
 
 	private:
