@@ -31,6 +31,7 @@ class mirror
 			
 		}
 		electric_field reflect (electric_field);
+		electric_field ex_reflect (electric_field);
 		electric_field transmit(electric_field);
 
 		double GetX(){return X;}

@@ -13,6 +13,14 @@ electric_field mirror::reflect(electric_field ef)
 	return er;
 }
 
+electric_field mirror::ex_reflect(electric_field ef)
+{
+	electric_field er;
+	er.SetA(ef.GetA()*R);	
+	er.SetPhi(ef.GetPhi());
+	return er;
+}
+
 electric_field mirror::transmit(electric_field ef)
 {
 	electric_field et;

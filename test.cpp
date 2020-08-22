@@ -41,7 +41,7 @@ double freq0 = las.GetFreq();
 
 las.SetFreq(fres);
 
-for(int i=0; i<10000; i++)
+for(int i=0; i<1000; i++)
 {
 	cav.GetNewEF(las);
 	ef = cav.GetErefl();
