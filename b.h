@@ -12,6 +12,8 @@ class b
 			Vout_old = 0.0;
 		}
 
+		double amp(double, double);
+
 	private:
 		double	R1;
 		double	R2;
