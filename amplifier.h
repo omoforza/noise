@@ -5,11 +5,15 @@
 #include"b.h"
 #include"c.h"
 #include"f.h"
+#include<iostream>
+using std::cout;
+using std::endl;
 class amplifier
 {
 	public:
 		amplifier(double g) : G(g) {}
-		double amp(double, double);
+		double Amp(double, double);
+		void test() {cout << "TEST" << endl;}
 	private:
 		//gain of the singles op-amp
 		double G;

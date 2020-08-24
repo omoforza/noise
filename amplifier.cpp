@@ -4,7 +4,7 @@
 #include"c.h"
 #include"f.h"
 
-double amplifier::amp(double Vin, double dt)
+double amplifier::Amp(double Vin, double dt)
 {
 //creation of all the components of the amplifier circuit
 

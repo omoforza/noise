@@ -50,6 +50,7 @@ void cavity::GetNewEF(laser & las)
 
 	//update of the time variable
 	TIME = TIME + 2.0*L/C;
+	DT = 2.0*L/C;
 }
 
 

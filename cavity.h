@@ -34,6 +34,7 @@ class cavity
 		void AssignLaser(laser &);
 
 		//Getters
+		double		GetDT()		{return DT;}
 		double		GetL()		{return L;}
 		double		GetTime()	{return TIME;}
 		electric_field	GetEinc()	{return Einc;}
@@ -85,6 +86,7 @@ class cavity
 		//simulation. The roundtrip of radiation is our variable
 		//deltaT
 		double TIME = 0.0;
+		double DT = 0.0;
 
 		//Theoretical free spectral range of the laser-cavity set
 		double FSR;

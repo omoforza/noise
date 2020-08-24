@@ -2,6 +2,11 @@
 #include"mirror.h"
 #include"electric_field.h"
 #include"laser.h"
+#include"a.h"
+#include"b.h"
+#include"c.h"
+#include"f.h"
+#include"amplifier.h"
 #include<iostream>
 #include<cmath>
 #include<fstream>
@@ -32,7 +37,9 @@ out.open("data.txt");
 
 
 double time;
+double dt;
 double intensity;
+double amp_int;
 electric_field ef;
 
 double fsr = C/(2.0*cav.GetL());
@@ -41,12 +48,18 @@ double freq0 = las.GetFreq();
 
 las.SetFreq(fres);
 
+amplifier Ampl{600.0e3};
+Ampl.test();
 for(int i=0; i<1000; i++)
 {
 	cav.GetNewEF(las);
 	ef = cav.GetErefl();
 	intensity = ef.Intensity();
 	time = cav.GetTime();
+	dt = cav.GetDT();
+	//amp_int = Ampl.Amp(intensity, dt);
+
+	out << time << "\t" << intensity << "\t" << amp_int << endl;
 	out << time << "\t" << intensity << endl;
 }	
 out.close();
