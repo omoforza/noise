@@ -1,10 +1,10 @@
 #ifndef AMPLIFIER_H
 #define AMPLIFIER_H
 
-#include"a.h"
-#include"b.h"
-#include"c.h"
-#include"f.h"
+#include"AmpA.h"
+#include"AmpB.h"
+#include"AmpC.h"
+#include"AmpF.h"
 #include<iostream>
 using std::cout;
 using std::endl;

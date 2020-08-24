@@ -2,10 +2,6 @@
 #include"mirror.h"
 #include"electric_field.h"
 #include"laser.h"
-#include"a.h"
-#include"b.h"
-#include"c.h"
-#include"f.h"
 #include"amplifier.h"
 #include<iostream>
 #include<cmath>
@@ -25,7 +21,7 @@ laser las;
 
 //mirror * m1 = (double r = 0.5, double phir = 0.0, double at = 0.0, 
 //double ar = 0.0, double t = 0.5, double phit = 0.0, double x = 0.0)
-mirror m1{0.90, PI, 0.0, 0.0, sqrt(1.0-0.90*0.90), 0.0, 0.1};
+mirror m1{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 0.1};
 mirror m2{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 1.1};
 
 
@@ -46,10 +42,9 @@ double fsr = C/(2.0*cav.GetL());
 double fres = round(las.GetFreq() / fsr)*fsr;
 double freq0 = las.GetFreq();
 
-las.SetFreq(fres);
+las.SetFreq(freq0);
 
 amplifier Ampl{600.0e3};
-Ampl.test();
 for(int i=0; i<1000; i++)
 {
 	cav.GetNewEF(las);
@@ -57,10 +52,8 @@ for(int i=0; i<1000; i++)
 	intensity = ef.Intensity();
 	time = cav.GetTime();
 	dt = cav.GetDT();
-	//amp_int = Ampl.Amp(intensity, dt);
-
+	amp_int = Ampl.Amp(intensity, dt);
 	out << time << "\t" << intensity << "\t" << amp_int << endl;
-	out << time << "\t" << intensity << endl;
 }	
 out.close();
 
