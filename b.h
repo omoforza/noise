@@ -7,7 +7,7 @@ class b
 		b(double r1 = 333.0, double r2 = 6.7e3, double r = 0.5,
 		double rout = 4.7e3, double cout = 3.0e-12,
 		double g = 600.0e3):
-		R1(r1), R2(r2), R(r), Rout(rout), Cout(cout), g(G)
+		R1(r1), R2(r2), R(r), Rout(rout), Cout(cout), G(g)
 		{
 			Vout_old = 0.0;
 		}

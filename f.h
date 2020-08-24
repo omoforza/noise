@@ -27,6 +27,7 @@ class f
 		double      R;
 		double   Rout;
 		double   Cout;
+		double   G;
 
 		//first step of integration
 		void step1(double, double);

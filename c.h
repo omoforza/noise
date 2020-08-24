@@ -23,6 +23,7 @@ class c
 		double   Rout;
 		double      R;
 		double   Cout; 
+		double   G; 
 		
 		double     R1;
 		double     R2;

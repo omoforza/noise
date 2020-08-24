@@ -19,6 +19,6 @@ class a
 		double C1;
 		//previous output of the amplifier
 		double V_old;
-}
+};
 
 #endif
