@@ -70,7 +70,7 @@ file_fft.open("fftOUT.txt");
 double df = 1.0/TMAX;
 for(int i = 0; i<N/2+1; i++)
 {
-	file_fft << df*i << "\t" << fft_out[i][0]*fft_out[i][0]<<"\t"<< fft_out1[i][0]*fft_out1[i][0] << endl;
+	file_fft << df*i << "\t" << fft_out[i][0]*fft_out[i][0] <<"\t"<< fft_out1[i][0]*fft_out1[i][0] << endl;
 }
 file_fft.close();
 
