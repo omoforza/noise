@@ -1,4 +1,8 @@
 #include"AmpB.h"
+#include<iostream>
+
+using std::cout;
+using std::endl;
 
 double AmpB::amp(double Vin, double dt)
 {
@@ -11,5 +15,14 @@ double AmpB::amp(double Vin, double dt)
 
 	Vout_old = Vout;
 	
+	return Vout;
+}
+
+
+
+double AmpB::ampID(double Vin, double dt)
+{
+	double Vout;
+	Vout = -G*R2/(R1+R2+G*R1)*Vin;
 	return Vout;
 }

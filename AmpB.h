@@ -17,7 +17,9 @@ class AmpB
 			Vout_old = 0.0;
 		}
 
-		double amp(double, double);
+		//amplifier stage and IDeal implifier stage
+		double amp (double, double);
+		double ampID(double, double);
 
 	private:
 		double	R1;
