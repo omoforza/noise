@@ -12,7 +12,7 @@ class AmpA
 		}
 		~AmpA() {}
 
-		double amp(double, double);
+		double ampID(double, double);
 
 	private:
 		double R1;
