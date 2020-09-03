@@ -39,3 +39,14 @@ Vin_old = Vin;
 
 return Vout;
 }
+
+
+double AmpF::ampID(double Vin, double dt)
+{
+	Vout = (Vout_old - (R2+R3)/R1/R3*dt*Vin - R2/R1*(Vin-Vin_old))
+		/(1.0+dt/C1/R3);
+	Vout_old = Vout;
+	Vin_old = Vin;
+	return Vout;
+}
+
