@@ -6,7 +6,7 @@ class AmpF
 	public:
 		AmpF(
 		double r1 = 4.7e3,
-		double r2 = 5.6, 
+		double r2 = 100.0,//5.6 
 		double r3 = 1.0e6,
 		double r = 0.5, 
 		double rout = 1000.0, 

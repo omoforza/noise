@@ -14,7 +14,7 @@ double amplifier::amp(double Vin, double dt)
 //linking op-amp cables
 double vtemp = 0.0;
 
-vtemp = AA.amp(Vin,dt);
+vtemp = AA.ampID(Vin,dt);
 //cout << "Out A = " << vtemp << endl;
 vtemp = BB.amp(vtemp,dt);
 //cout << "Out B = " << vtemp << endl;
@@ -34,7 +34,7 @@ return vtemp;
 }
 
 
-double amplifier::amp(double Vin, double dt)
+double amplifier::ampID(double Vin, double dt)
 {
 //linking op-amp cables
 double vtemp = 0.0;
