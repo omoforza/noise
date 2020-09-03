@@ -39,6 +39,9 @@ class laser
 		double GetFreq(){return FREQ;}
 
 	private:
+		//oscillator is a function of time that modulates the 
+		//phase of the emitted field
+		double oscillator(double);
 		void Init();
 		double FREQ;
 		const double PI = acos(-1.0);

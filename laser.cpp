@@ -28,3 +28,8 @@ electric_field laser::GetField(double d, double t)
 	return ef;
 }
 
+double laser::oscillator()
+{
+
+}
+
