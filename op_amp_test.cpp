@@ -3,6 +3,7 @@
 #include"AmpC.h"
 #include"AmpF.h"
 #include"amplifier.h"
+#include"hpf.h"
 #include<iostream>
 #include<fstream>
 #include<math.h>
@@ -22,7 +23,7 @@ using std::normal_distribution;
 int main()
 {
 //choose the op-amp to test
-AmpF a;
+hpf a;
 
 default_random_engine         generator(84743367);
 normal_distribution<double>   normal(0.0L,1.0L);
@@ -42,7 +43,9 @@ for(int i=0; i<N; i++)
 	time = dt*i;
 	in  = normal(generator);
 	//in  = 1.0;
-	out = a.ampID(in,dt);
+
+	out = a.filter(in,dt);
+
 	file << time << "\t" << in << "\t" << out << endl;
 	fft_in[i] = out;
 	fft_in1[i] = in;
