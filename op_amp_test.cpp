@@ -22,7 +22,7 @@ using std::normal_distribution;
 int main()
 {
 //choose the op-amp to test
-AmpA a{600.e3};
+AmpB a{600.e3};
 
 default_random_engine         generator(84743367);
 normal_distribution<double>   normal(0.0L,1.0L);
@@ -54,7 +54,7 @@ file.close();
 //creation of variables used in fftw3
 fftw_complex* fft_out;
 fftw_complex* fft_out1;
-fft_out = (fftw_complex *) fftw_malloc( sizeof(fftw_complex) * (N/2 + 1) );
+fft_out  = (fftw_complex *) fftw_malloc( sizeof(fftw_complex) * (N/2 + 1) );
 fft_out1 = (fftw_complex *) fftw_malloc( sizeof(fftw_complex) * (N/2 + 1) );
 
 //fftw3 plan definition
