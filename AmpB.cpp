@@ -20,6 +20,7 @@ double AmpB::amp(double Vin, double dt)
 
 
 
+//ideal behavior
 double AmpB::ampID(double Vin, double dt)
 {
 	double Vout;

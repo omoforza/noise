@@ -37,5 +37,7 @@ double AmpC::ampID(double Vin, double dt)
 {
 	double Vout;
 	Vout = Vout_old - R2/R1*(Vin - Vin_old) - dt/(R1*C1)*Vin;
+	Vout_old = Vout;
+	Vin_old = Vin;
 	return Vout;
 }

@@ -3,29 +3,32 @@
 #include"AmpB.h"
 #include"AmpC.h"
 #include"AmpF.h"
+#include<iostream>
 
-double amplifier::Amp(double Vin, double dt)
+using std::cout;
+using std::endl;
+
+double amplifier::amp(double Vin, double dt)
 {
-//creation of all the components of the amplifier circuit
-
-AmpA AA{1000.0,100.0e-12};
-AmpB BB{333.0,6.7e3,0.5,4.7e3,3.0e-12,G};
-AmpC CC{4.7e3,4.7e3,0.5,4.7e3,3.0e-12,5.6e-9,G};
-AmpC DD{4.7e3,4.7e3,0.5,22.0e3,3.0e-12,5.6e-9,G};
-AmpC EE{22.0e3,22.0e3,0.5,1.0/(1.0/4.7e3+1.0/1.0e6),3.0e-12,1.2e-9,G};
-AmpF FF{4.7e3,5.6,1.0e6,0.5,1000.0,3.0e-12,1.0e-6,G};
-AmpB GG{1000.0,1000.0,0.5,4.7e3,3.0e-12,G};
-
 
 //linking op-amp cables
 double vtemp = 0.0;
+
 vtemp = AA.amp(Vin,dt);
+//cout << "Out A = " << vtemp << endl;
 vtemp = BB.amp(vtemp,dt);
+//cout << "Out B = " << vtemp << endl;
 vtemp = CC.amp(vtemp,dt);
+//cout << "Out C = " << vtemp << endl;
 vtemp = DD.amp(vtemp,dt);
+//cout << "Out D = " << vtemp << endl;
 vtemp = EE.amp(vtemp,dt);
+//cout << "Out E = " << vtemp << endl;
 vtemp = FF.amp(vtemp,dt);
+//cout << "Out F = " << vtemp << endl;
 vtemp = GG.amp(vtemp,dt);
+//cout << "Out G = " << vtemp << endl;
+//cout << " " << endl;
 
 return vtemp;
 }

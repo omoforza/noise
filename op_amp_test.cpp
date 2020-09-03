@@ -22,7 +22,7 @@ using std::normal_distribution;
 int main()
 {
 //choose the op-amp to test
-AmpB a;
+amplifier a{600.0e3};
 
 default_random_engine         generator(84743367);
 normal_distribution<double>   normal(0.0L,1.0L);
@@ -32,7 +32,7 @@ ofstream file;
 file.open("op_amp.txt");
 
 double in, out, time;
-int N = 10000;
+int N = 10;
 double TMAX = 1.0; //seconds
 double dt = TMAX/(1.0*N);
 double * fft_in  = new double[N];
