@@ -5,7 +5,10 @@ class AmpA
 {
 	public:
 		//resistance and capacity value in Ohm and Fahrad
-		AmpA(double r1 = 1000.0, double c1 = 100.0e-12):
+		AmpA(
+		double r1 = 1000.0,
+		double c1 = 100.0e-12
+		):
 			R1(r1), C1(c1)
 		{
 			V_old = 0.0;
