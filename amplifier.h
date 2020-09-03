@@ -12,8 +12,10 @@ class amplifier
 {
 	public:
 		amplifier(double g) : G(g) {}
-		double amp(double, double);
-		void test() {cout << "TEST" << endl;}
+
+
+		double amp  (double, double);
+		double ampID(double, double);
 	private:
 		//gain of the singles op-amp
 		double G;

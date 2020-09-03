@@ -32,3 +32,19 @@ vtemp = GG.amp(vtemp,dt);
 
 return vtemp;
 }
+
+
+double amplifier::amp(double Vin, double dt)
+{
+//linking op-amp cables
+double vtemp = 0.0;
+
+vtemp = AA.ampID(Vin,dt);
+vtemp = BB.ampID(vtemp,dt);
+vtemp = CC.ampID(vtemp,dt);
+vtemp = DD.ampID(vtemp,dt);
+vtemp = EE.ampID(vtemp,dt);
+vtemp = FF.ampID(vtemp,dt);
+vtemp = GG.ampID(vtemp,dt);
+return vtemp;
+}
