@@ -19,6 +19,7 @@ class AmpB
 
 		//amplifier stage and IDeal implifier stage
 		double amp (double, double);
+		//ideal
 		double ampID(double, double);
 
 	private:
