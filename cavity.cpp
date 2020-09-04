@@ -62,6 +62,10 @@ void cavity::rampa(laser & las)
         ofstream out;
         out.open("rampa.txt");
 
+	//turn off beta modulation depth	
+	double b = las.GetBeta();
+	las.SetBeta(0.0);
+
 	//laser frequency before rampa
 	const double freq0 = las.GetFreq();
 
@@ -111,5 +115,6 @@ void cavity::rampa(laser & las)
         out.close();
 	//laser frequency is set to the original frequency once again
 	las.SetFreq(freq0);
+	las.SetBeta(b);
 }
 
