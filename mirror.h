@@ -2,6 +2,7 @@
 #define MIRROR_H
 
 #include"electric_field.h"
+#include<math.h>
 
 class mirror
 {
