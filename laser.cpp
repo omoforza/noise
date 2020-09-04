@@ -34,3 +34,11 @@ double dphi = beta*sin(omegaM*t);
 return dphi;
 }
 
+
+void laser::ErrSig(double err)
+{
+	SetFreq(FREQ + err);
+}
+
+
+

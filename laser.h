@@ -26,6 +26,8 @@ class laser
         		K = 2.0*PI/LAMBDA;
 		}
 
+		void SetBeta(double b){beta = b;}
+
 		double GetIntensity() {return INTENSITY;}
 		
 		//this function give the electric field in x at time t
@@ -35,8 +37,16 @@ class laser
 		electric_field GetField(double d, double t);
 
 		double GetX() {return X;}
+		double GetBeta() {return beta;}
 
 		double GetFreq(){return FREQ;}
+
+		double GetOmegaM(){return omegaM;}
+
+		//error signal function fed to the laser
+		//err signal [Hz]
+		void ErrSig(double);
+
 
 	private:
 		//oscillator is a function of time that modulates the 
@@ -52,7 +62,7 @@ class laser
 		double X;
 		double INTENSITY;
 		//phase modulation depth
-		const double beta	= 1.1;
+		double beta		= 1.1;
 		const double freqM 	= 717.7e3;
 		const double omegaM	= 2.0*PI*freqM;
 };
