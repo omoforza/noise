@@ -60,7 +60,7 @@ void cavity::rampa(laser & las)
 
 	//output file to store data
         ofstream out;
-        out.open("rampa.txt");
+        out.open("ReflInt.txt");
 
 	//turn off beta modulation depth	
 	double b = las.GetBeta();
