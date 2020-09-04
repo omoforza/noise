@@ -46,7 +46,7 @@ void cavity::GetNewEF(laser & las)
 
 	//Using Einc it is possible to define Erefl using the
 	//properties of the mirror
-	Erefl = M1.ex_reflect(Einc) + M1.transmit(etemp);
+	Erefl = M1.ex_reflect(Einc) - M1.transmit(etemp);
 
 	//update of the time variable
 	TIME = TIME + 2.0*L/C;
