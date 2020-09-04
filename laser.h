@@ -51,6 +51,10 @@ class laser
 		double OMEGA;
 		double X;
 		double INTENSITY;
+		//phase modulation depth
+		const double beta	= 1.1;
+		const double freqM 	= 717.7e3;
+		const double omegaM	= 2.0*PI*freqM;
 };
 
 #endif
