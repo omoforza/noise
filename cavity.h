@@ -40,7 +40,7 @@ class cavity
 		electric_field	GetEinc()  {return Einc;}
 		electric_field 	GetErefl() {return Erefl;}
 		electric_field 	GetEplus() {return Eplus;}
-		electric_field 	GetIrefl() {return Erefl.Intensity();}
+		double		GetIrefl() {return Erefl.Intensity();}
 
 		//cavity reset function: all fields are set to zero
 		void reset();

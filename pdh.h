@@ -21,12 +21,21 @@ class pdh
 		//APPARATUS TESTING ROUTINES
 
 		//** Reflected intensity of the cavity alone as a function
-		//** of frequency. The results are saved in ReflInt.txt
+		//** of frequency. The results are saved in "ReflInt.txt"
 		//** The first column is made up of frequencies, the
 		//** second contains intensities.
 		void ReflInt();
 
+		//** Reflected intensity as a function of time. The cavity
+		//** is not stabilized during this routine. The only
+		//** interaction is between laser and cavity.
+		//** This function stores the reflected intensity values 
+		//** in: "charge.txt".
+		void ChargeCavity();
+
 	private:
+		//all constant MUST be defined before they are used.
+		const double C = 299792458.0;
 		const double PI = acos(-1.0);
 		laser las;
 		mirror m1{0.99,PI,0.0,0.0,sqrt(1.0-0.99*0.99),0.0,0.1};
@@ -36,6 +45,5 @@ class pdh
 		AmpA pz{50.0,1.0e-9};
 		amplifier Ampl{600.0e3};
 
-		const double C = 299792458.0;
 };
 #endif
