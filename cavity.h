@@ -42,7 +42,7 @@ class cavity
 		electric_field 	GetEplus()	{return Eplus;}
 
 		//cavity reset function: all fields are set to zero
-		void reset() {Init();}
+		void reset();
 
 		//rampa is used to obtain the reflected intensity of
                 //a cavity as a function of laser frequency

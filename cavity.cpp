@@ -29,6 +29,19 @@ void cavity::Init()
 	FSR = C/(2.0*L);
 }
 
+void reset()
+{
+	TIME	= 0.0;
+	DT	= 0.0;
+
+        Eplus.SetA  (0.0);
+        Eplus.SetPhi(0.0);
+        Erefl.SetA  (0.0);
+        Erefl.SetPhi(0.0);
+        Einc.SetA   (0.0);
+        Einc.SetPhi (0.0);
+}
+
 void cavity::AssignLaser(laser & las)
 {
 	D0 = M1.GetX() - las.GetX();
