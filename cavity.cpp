@@ -29,7 +29,7 @@ void cavity::Init()
 	FSR = C/(2.0*L);
 }
 
-void reset()
+void cavity::reset()
 {
 	TIME	= 0.0;
 	DT	= 0.0;
