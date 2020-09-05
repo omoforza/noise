@@ -6,6 +6,10 @@
 #include<iostream>
 #include<complex>
 using std::ostream;
+using std::complex;
+using std::polar;
+using std::real;
+using std::imag;
 
 class electric_field
 {
@@ -15,7 +19,9 @@ class electric_field
 		electric_field(double a = 0.0, double phi = 0.0) :
 			A(a), PHI(phi)
 		{
-
+			E_C	= polar(A,PHI);
+			E_RE	= E_C.real();
+			E_IM	= E_C.imag();
 		}
 		
 		~electric_field() {}
@@ -68,7 +74,7 @@ class electric_field
 	private:
 		double A;
 		double PHI;
-		complex<double> E_C
+		complex<double> E_C;
 		double E_RE;
 		double E_IM;
 };

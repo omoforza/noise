@@ -6,6 +6,7 @@
 #include"hpf.h"
 #include"amplifier.h"
 #include"AmpA.h"
+#include<math.h>
 class pdh
 {
 	public:

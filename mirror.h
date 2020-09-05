@@ -11,9 +11,15 @@ class mirror
 		//phi is the phase change due to reflection
 		//a is the absorption so that r*r+t*t = 1-a
 		//position in m from the laser or the origin
-		mirror(double r = 0.5, double phir = 0.0, double at = 0.0,
-		double ar = 0.0, double t = 0.5, double phit = 0.0, 
-		double x = 0.0):
+		mirror(
+		double r = 0.5, 
+		double phir = 0.0, 
+		double at = 0.0,
+		double ar = 0.0, 
+		double t = 0.5, 
+		double phit = 0.0, 
+		double x = 0.0
+		):
 			R(r), PHIR(phir), AT(at), AR(ar), PHIT (phit),
 		       	T(t), X(x)
 		{
