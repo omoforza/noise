@@ -31,7 +31,9 @@ class pdh
 		//** interaction is between laser and cavity.
 		//** This function stores the reflected intensity values 
 		//** in: "charge.txt".
-		void ChargeCavity();
+		//** If true charge in resonance, if false charge out
+		//** of resonance
+		void ChargeCavity(bool);
 
 	private:
 		//all constant MUST be defined before they are used.

@@ -13,8 +13,9 @@ void pdh::ReflInt()
 	cav.reset();
 }
 
-void pdh::ChargeCavity()
+void pdh::ChargeCavity(bool ind)
 {
+	if(ind){cav.SetResFreq(las);}
 	double b;
 	b = las.GetBeta();	
 	las.SetBeta(0.0);

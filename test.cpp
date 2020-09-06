@@ -4,6 +4,6 @@ int main()
 {
 pdh p;
 p.ReflInt();
-p.ChargeCavity();
+p.ChargeCavity(false);
 return 0;
 }

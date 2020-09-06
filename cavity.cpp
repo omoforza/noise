@@ -132,7 +132,7 @@ void cavity::rampa(laser & las)
 }
 
 
-void SetResFreq(laser & las)
+void cavity::SetResFreq(laser & las)
 {
 	AssignLaser(las);
 	double fres = round(las.GetFreq() / FSR)*FSR;

@@ -48,7 +48,7 @@ class laser
 		void ErrSig(double);
 
 		//reset to initial frequency
-		void reset() {SetFreq(FREQ0)};
+		void reset() {SetFreq(FREQ0);}
 
 
 	private:
