@@ -11,6 +11,7 @@ using std::ofstream;
 void laser::Init()
 {
 	FREQ = C/LAMBDA;
+	FREQ0 = FREQ;
         OMEGA = 2.0*PI*FREQ;
         K = 2.0*PI/LAMBDA;
 }

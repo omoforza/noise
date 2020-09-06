@@ -54,6 +54,8 @@ class laser
 		double oscillator(double);
 		void Init();
 		double FREQ;
+		//initially defined frequency
+		double FREQ0;
 		const double PI = acos(-1.0);
 		const double C = 299792458.0;
 		double LAMBDA;
