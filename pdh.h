@@ -18,6 +18,9 @@ class pdh
 		}
 		~pdh	(){}
 
+
+		double GetLasFreq(){return las.GetFreq();}
+
 		//APPARATUS TESTING ROUTINES
 
 		//** Reflected intensity of the cavity alone as a function
@@ -34,6 +37,21 @@ class pdh
 		//** If true charge in resonance, if false charge out
 		//** of resonance
 		void ChargeCavity(bool);
+
+		//** PDH error signal as a function of frequency around
+		//** the resonance frequency. The values are all saved
+		//** into "ErrorSignal.txt"
+		//void ErrorSignal();
+
+		//SIMULATION ROUTINES
+
+		//** This routine is the actual simulation, the error 
+		//** signal can be fed or not to the laser using a boolean
+		//** variable. 
+		//** 1. "true" : is fed to the laser
+		//** 2. "false": is NOT fed to the laser
+
+		void Sim(bool, double);
 
 	private:
 		//all constant MUST be defined before they are used.
