@@ -51,6 +51,9 @@ class cavity
 		//actual laser frequency
                 void rampa(laser &);
 
+		//set resonance frequency in the coupled laser
+		void SetResFreq(laser & las);
+
 	private:
 		//distance at equilibrium between laser and first mirror
 		//of the cavity
