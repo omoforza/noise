@@ -47,6 +47,9 @@ class laser
 		//err signal [Hz]
 		void ErrSig(double);
 
+		//reset to initial frequency
+		void reset() {SetFreq(FREQ0)};
+
 
 	private:
 		//oscillator is a function of time that modulates the 
