@@ -41,7 +41,7 @@ class pdh
 		//** PDH error signal as a function of frequency around
 		//** the resonance frequency. The values are all saved
 		//** into "ErrorSignal.txt"
-		//void ErrorSignal();
+		void ErrorSignal();
 
 		//SIMULATION ROUTINES
 
@@ -50,20 +50,23 @@ class pdh
 		//** variable. 
 		//** 1. "true" : is fed to the laser
 		//** 2. "false": is NOT fed to the laser
-
-		void Sim(bool, double);
+		void Sim(bool);
 
 	private:
 		//all constant MUST be defined before they are used.
 		const double C = 299792458.0;
 		const double PI = acos(-1.0);
 		laser las;
-		mirror m1{sqrt(.99862),PI,.0,.0,sqrt(1.-.99862),.0,.1};
-		mirror m2{sqrt(.99862),PI,.0,.0,sqrt(1.-.99862),.0,.985};
+		mirror m1{sqrt(.99862),PI,.0,.0,sqrt(1.-.99862),.0,.0};
+		mirror m2{sqrt(.99862),PI,.0,.0,sqrt(1.-.99862),.0,.885};
 		cavity cav{m1,m2};
 		hpf h1;
 		AmpA pz{50.0,1.0e-9};
 		amplifier Ampl{600.0e3};
+		//error signal amplification factor
+		const double AA = 1.0e10;
+
+		const double DPhase = -1.0*PI*0.5;
 
 };
 #endif

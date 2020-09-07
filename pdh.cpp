@@ -9,7 +9,64 @@ using std::setprecision;
 
 void pdh::ReflInt()
 {
-	cav.rampa(las);
+        cav.AssignLaser(las);
+
+        //output file to store data
+        ofstream out;
+        out.open("ReflInt.txt");
+
+        //turn off beta modulation depth        
+        double b = las.GetBeta();
+        las.SetBeta(0.0);
+
+        //laser frequency before rampa
+        const double freq0 = las.GetFreq();
+
+        //rampa will scan frequency around the nearest resonance frequency
+        double f_res = cav.GetFres();
+
+        //freq boundariies of rampa
+        double f1,f2;
+
+	double FSR = cav.GetFSR();
+
+        f1 = f_res - FSR*0.004;
+        f2 = f_res + FSR*0.004;
+
+        //number of samples
+        int N = 1000;
+
+        //delta frequency
+        double delta;
+        delta = (f2 - f1)/(1.0*N);
+
+        //reflected intensity
+        double ir;
+        electric_field ef;
+
+        for(int j=0; j<N; j++)
+        {
+                las.SetFreq(f1 + delta*j);
+                //the cavity charge for 1000 round trip of light
+                //before the value of reflected field is stored
+                //this number SHOULD be adjusted depending on the
+                //reflectivity of mirrors
+                for(int i=0; i<7000; i++)
+                {
+                        cav.GetNewEF(las);
+                }
+                ef = cav.GetErefl();
+                ir = ef.Intensity();
+                out <<setprecision(15) <<
+                        delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
+                //cavity reset before new acquisition
+                cav.reset();
+        }
+        out.close();
+        //laser frequency is set to the original frequency once again
+        las.SetFreq(freq0);
+        las.SetBeta(b);
+
 	cav.reset();
 }
 
@@ -32,7 +89,7 @@ void pdh::ChargeCavity(bool ind)
 	cav.reset();
 	las.SetBeta(b);
 }
-/*
+
 void pdh::ErrorSignal()
 {
 	cav.reset();
@@ -41,45 +98,50 @@ void pdh::ErrorSignal()
         //output file to store data
         ofstream out;
         out.open("ErrorSignal.txt");
+	out<<setprecision(15);
 
         //this routine will  scan frequency around the nearest
 	//resonance frequency
-        double f_res;
-        //number of time the free spectral range frequency fit into
-        //the laser frequency
-        double nfsr = round(freq0/FSR);
-        //we fix the nearest resonce to laser frequency
-        f_res = FSR * nfsr;
+	double f_res 	= cav.GetFres();
+	double FSR	= cav.GetFSR();	
 
         //boundaries frequencies
         double f1,f2;
 
-        f1 = f_res - FSR*0.1;
-        f2 = f_res + FSR*0.1;
+        f1 = f_res - FSR*0.004;
+        f2 = f_res + FSR*0.004;
 
         //number of samples
-        int N = 1000;
+        int N = 1000000;
 
         //delta frequency
         double delta;
         delta = (f2 - f1)/(1.0*N);
+	double time, dt, intensity, temp;
+	bool ind = true;
 
         for(int j=0; j<N; j++)
         {
                 las.SetFreq(f1 + delta*j);
-                //the cavity charge for 1000 round trip of light
-                for(int i=0; i<1000; i++)
-                {
-//                        GetNewEF(las);
-                }
-                //out <<setprecision(18) <<
-                //cavity reset before new acquisition
-                cav.reset();
+                cav.GetNewEF(las);
+                time = cav.GetTime();
+                dt = cav.GetDT();
+                out << delta*j - (f2-f1)*0.5 << "\t";
+                intensity = cav.GetIrefl();
+                out << intensity << "\t";
+                temp = h1.filter(intensity,dt);
+                temp = temp*sin(las.GetOmegaM()*time + DPhase);
+                out << temp << "\t";
+                temp = Ampl.ampID(temp, dt, ind);
+		temp = pz.ampID(temp,dt);
+                temp = temp*AA;
+                out << temp << endl;
+
         }
         out.close();
 }
-*/
-void pdh::Sim(bool ampStatus, double freq)
+
+void pdh::Sim(bool ampStatus)
 {
 	ofstream out;
 	out.open("data.txt");
@@ -88,24 +150,24 @@ void pdh::Sim(bool ampStatus, double freq)
 	double time;
 	double dt;
 	double intensity;
-	electric_field ef;
 	
 	cav.SetResFreq(las);	
 
 	double temp = 0.0;
-	for(int i=0; i<100000; i++)
+	bool ind = false;//turn on or off integration stages in the amp
+	for(int i=0; i<10000; i++)
 	{
 	        cav.GetNewEF(las);
-	        ef = cav.GetErefl();
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
 	        out << time << "\t";
-	        intensity = ef.Intensity();
+	        intensity = cav.GetIrefl();
 	        out << intensity << "\t";
 	        temp = h1.filter(intensity,dt);
-	        temp = temp*sin(las.GetOmegaM()*time - PI*0.5);
-	        temp = Ampl.ampID(temp, dt);
-	        temp = temp*10.0e7;
+	        temp = temp*sin(las.GetOmegaM()*time + DPhase);
+	        temp = Ampl.ampID(temp, dt, ind);
+		temp = pz.ampID(temp,dt);
+	        temp = temp*AA;
 		if(ampStatus) {las.ErrSig(temp);}
 	        out << temp << endl;
 	}

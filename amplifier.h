@@ -14,8 +14,8 @@ class amplifier
 		amplifier(double g) : G(g) {}
 
 
-		double amp  (double, double);
-		double ampID(double, double);
+		double amp  (double, double, bool);
+		double ampID(double, double, bool);
 	private:
 		//gain of the singles op-amp
 		double G;

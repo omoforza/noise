@@ -41,6 +41,8 @@ class cavity
 		electric_field 	GetErefl() {return Erefl;}
 		electric_field 	GetEplus() {return Eplus;}
 		double		GetIrefl() {return Erefl.Intensity();}
+		double		GetFres()  {return FRES;}
+		double		GetFSR()  {return FSR;}
 
 		//cavity reset function: all fields are set to zero
 		void reset();
@@ -97,6 +99,9 @@ class cavity
 
 		//speed of light in m/s
 		const double C = 299792458.0;
+
+		//resonance frequency associated to the associated laser
+		double FRES;
 };
 
 #endif

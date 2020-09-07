@@ -46,7 +46,8 @@ void cavity::reset()
 
 void cavity::AssignLaser(laser & las)
 {
-	D0 = M1.GetX() - las.GetX();
+	D0	= M1.GetX() - las.GetX();
+	FRES	= round(las.GetFreq() / FSR)*FSR;
 }
 
 void cavity::GetNewEF(laser & las)
@@ -85,12 +86,7 @@ void cavity::rampa(laser & las)
 	const double freq0 = las.GetFreq();
 
 	//rampa will scan frequency around the nearest resonance frequency
-	double f_res;
-	//number of time the free spectral range frequency fit into
-	//the laser frequency
-	double nfsr = round(freq0/FSR);
-	//we fix the nearest resonce to laser frequency
-	f_res = FSR * nfsr;
+	double f_res = GetFres();
 
 	//freq boundariies of rampa
 	double f1,f2;
@@ -137,7 +133,6 @@ void cavity::rampa(laser & las)
 void cavity::SetResFreq(laser & las)
 {
 	AssignLaser(las);
-	double fres = round(las.GetFreq() / FSR)*FSR;
-	las.SetFreq(fres);	
+	las.SetFreq(FRES);	
 }
 
