@@ -24,8 +24,8 @@ laser las;
 
 //mirror * m1 = (double r = 0.5, double phir = 0.0, double at = 0.0, 
 //double ar = 0.0, double t = 0.5, double phit = 0.0, double x = 0.0)
-mirror m1{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 0.1};
-mirror m2{0.99, PI, 0.0, 0.0, sqrt(1.0-0.99*0.99), 0.0, 1.1};
+mirror m1{0.999, PI, 0.0, 0.0, sqrt(1.0-0.999*0.999), 0.0, 0.1};
+mirror m2{0.999, PI, 0.0, 0.0, sqrt(1.0-0.999*0.999), 0.0, 1.1};
 
 
 //creazione della cavità
@@ -50,6 +50,7 @@ double fres = round(las.GetFreq() / fsr)*fsr;
 double freq0 = las.GetFreq();
 
 las.SetFreq(fres);
+cav.rampa();
 
 amplifier Ampl{600.0e3};
 for(int i=0; i<1000000; i++)
