@@ -93,7 +93,7 @@ void pdh::Sim(bool ampStatus, double freq)
 	cav.SetResFreq(las);	
 
 	double temp = 0.0;
-	for(int i=0; i<10000; i++)
+	for(int i=0; i<100000; i++)
 	{
 	        cav.GetNewEF(las);
 	        ef = cav.GetErefl();
@@ -103,9 +103,9 @@ void pdh::Sim(bool ampStatus, double freq)
 	        intensity = ef.Intensity();
 	        out << intensity << "\t";
 	        temp = h1.filter(intensity,dt);
-	        temp = temp*sin(las.GetOmegaM()*time + PI*0.5);
+	        temp = temp*sin(las.GetOmegaM()*time - PI*0.5);
 	        temp = Ampl.ampID(temp, dt);
-	        temp = temp*10.0e6;
+	        temp = temp*10.0e7;
 		if(ampStatus) {las.ErrSig(temp);}
 	        out << temp << endl;
 	}

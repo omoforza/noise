@@ -58,8 +58,8 @@ class pdh
 		const double C = 299792458.0;
 		const double PI = acos(-1.0);
 		laser las;
-		mirror m1{0.99,PI,0.0,0.0,sqrt(1.0-0.99*0.99),0.0,0.1};
-		mirror m2{0.99,PI,0.0,0.0,sqrt(1.0-0.99*0.99),0.0,1.1};
+		mirror m1{sqrt(.99862),PI,.0,.0,sqrt(1.-.99862),.0,.1};
+		mirror m2{sqrt(.99862),PI,.0,.0,sqrt(1.-.99862),.0,.985};
 		cavity cav{m1,m2};
 		hpf h1;
 		AmpA pz{50.0,1.0e-9};

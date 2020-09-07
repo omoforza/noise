@@ -40,6 +40,8 @@ void cavity::reset()
         Erefl.SetPhi(0.0);
         Einc.SetA   (0.0);
         Einc.SetPhi (0.0);
+        etemp.SetA   (0.0);
+        etemp.SetPhi (0.0);
 }
 
 void cavity::AssignLaser(laser & las)
@@ -93,11 +95,11 @@ void cavity::rampa(laser & las)
 	//freq boundariies of rampa
 	double f1,f2;
 
-	f1 = f_res - FSR*0.1;
-	f2 = f_res + FSR*0.1;
+	f1 = f_res - FSR*0.05;
+	f2 = f_res + FSR*0.05;
 
         //number of samples
-        int N = 1000;
+        int N = 5000;
 
         //delta frequency
         double delta;
@@ -121,7 +123,7 @@ void cavity::rampa(laser & las)
                 ef = GetErefl();
                 ir = ef.Intensity();
                 out <<setprecision(18) <<
-			las.GetFreq() << "\t" << ir << endl;
+			delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
                 //cavity reset before new acquisition
                 reset();
         }
