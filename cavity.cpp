@@ -95,11 +95,11 @@ void cavity::rampa(laser & las)
 	//freq boundariies of rampa
 	double f1,f2;
 
-	f1 = f_res - FSR*0.05;
-	f2 = f_res + FSR*0.05;
+	f1 = f_res - FSR*0.004;
+	f2 = f_res + FSR*0.004;
 
         //number of samples
-        int N = 5000;
+        int N = 1000;
 
         //delta frequency
         double delta;
@@ -116,7 +116,7 @@ void cavity::rampa(laser & las)
 		//before the value of reflected field is stored
 		//this number SHOULD be adjusted depending on the
 		//reflectivity of mirrors
-                for(int i=0; i<8000; i++)
+                for(int i=0; i<7000; i++)
                 {
                         GetNewEF(las);
                 }
