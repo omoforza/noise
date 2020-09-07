@@ -84,7 +84,7 @@ void cavity::rampa(laser & las)
 	//laser frequency before rampa
 	const double freq0 = las.GetFreq();
 
-	//rampa will scan frequency around the nearer resonance frequency
+	//rampa will scan frequency around the nearest resonance frequency
 	double f_res;
 	//number of time the free spectral range frequency fit into
 	//the laser frequency
@@ -116,13 +116,13 @@ void cavity::rampa(laser & las)
 		//before the value of reflected field is stored
 		//this number SHOULD be adjusted depending on the
 		//reflectivity of mirrors
-                for(int i=0; i<1000; i++)
+                for(int i=0; i<8000; i++)
                 {
                         GetNewEF(las);
                 }
                 ef = GetErefl();
                 ir = ef.Intensity();
-                out <<setprecision(18) <<
+                out <<setprecision(15) <<
 			delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
                 //cavity reset before new acquisition
                 reset();
