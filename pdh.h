@@ -57,8 +57,9 @@ class pdh
 		const double C = 299792458.0;
 		const double PI = acos(-1.0);
 		laser las;
-		mirror m1{sqrt(.99862),PI,.0,.0,sqrt(1.-.99862),.0,.0};
-		mirror m2{sqrt(.99862),PI,.0,.0,sqrt(1.-.99862),.0,.885};
+		double R = 0.99826;
+		mirror m1{sqrt(R),PI,.0,.0,sqrt(1.- R),.0,.1};
+		mirror m2{sqrt(R),PI,.0,.0,sqrt(1.- R),.0,.985};
 		cavity cav{m1,m2};
 		hpf h1;
 		AmpA pz{50.0,1.0e-9};
@@ -66,7 +67,7 @@ class pdh
 		//error signal amplification factor
 		const double AA = 1.0e10;
 
-		const double DPhase = -1.0*PI*0.5;
+		const double DPhase = PI*0.5;
 
 };
 #endif

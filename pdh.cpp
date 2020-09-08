@@ -1,9 +1,11 @@
 #include"pdh.h"
 #include"electric_field.h"
 #include<fstream>
+#include<iostream>
 #include<iomanip>
 
 using std::endl;
+using std::cout;
 using std::ofstream;
 using std::setprecision;
 
@@ -112,7 +114,7 @@ void pdh::ErrorSignal()
         f2 = f_res + FSR*0.004;
 
         //number of samples
-        int N = 1000000;
+        int N = 650000;
 
         //delta frequency
         double delta;
@@ -126,13 +128,15 @@ void pdh::ErrorSignal()
                 cav.GetNewEF(las);
                 time = cav.GetTime();
                 dt = cav.GetDT();
+		if(j==1){cout << "Vel Rampa(3.5e8) = "<<delta/dt<<endl;}
                 out << delta*j - (f2-f1)*0.5 << "\t";
                 intensity = cav.GetIrefl();
                 out << intensity << "\t";
-                temp = h1.filter(intensity,dt);
+		temp = intensity;
+                temp = h1.filter(temp,dt);
                 temp = temp*sin(las.GetOmegaM()*time + DPhase);
                 out << temp << "\t";
-                temp = Ampl.ampID(temp, dt, ind);
+                temp = Ampl.ampID(temp, dt, ind, true, out);
 		temp = pz.ampID(temp,dt);
                 temp = temp*AA;
                 out << temp << endl;
@@ -165,7 +169,7 @@ void pdh::Sim(bool ampStatus)
 	        out << intensity << "\t";
 	        temp = h1.filter(intensity,dt);
 	        temp = temp*sin(las.GetOmegaM()*time + DPhase);
-	        temp = Ampl.ampID(temp, dt, ind);
+	        temp = Ampl.ampID(temp, dt, ind, false, out);
 		temp = pz.ampID(temp,dt);
 	        temp = temp*AA;
 		if(ampStatus) {las.ErrSig(temp);}
