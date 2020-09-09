@@ -9,13 +9,13 @@ using std::cout;
 using std::ofstream;
 using std::setprecision;
 
-void pdh::ReflInt()
+void pdh::ReflIntStatic()
 {
         cav.AssignLaser(las);
 
         //output file to store data
         ofstream out;
-        out.open("ReflInt.txt");
+        out.open("ReflIntS.txt");
 
         //turn off beta modulation depth        
         double b = las.GetBeta();
@@ -63,6 +63,67 @@ void pdh::ReflInt()
                         delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
                 //cavity reset before new acquisition
                 cav.reset();
+        }
+        out.close();
+        //laser frequency is set to the original frequency once again
+        las.SetFreq(freq0);
+        las.SetBeta(b);
+
+	cav.reset();
+}
+
+//vel is a velocity in Hz/s
+void pdh::ReflIntDynamic(double vel)
+{
+        cav.AssignLaser(las);
+
+        //output file to store data
+        ofstream out;
+        out.open("ReflIntD.txt");
+
+        //turn off beta modulation depth        
+        double b = las.GetBeta();
+        las.SetBeta(0.0);
+
+        //laser frequency before the routine was called
+        const double freq0 = las.GetFreq();
+
+        //We will scan frequency around the nearest resonance frequency
+        double f_res = cav.GetFres();
+
+        //freq boundaries
+        double f1,f2;
+
+	double FSR = cav.GetFSR();
+
+        f1 = f_res - FSR*0.015;
+        f2 = f_res + FSR*0.015;
+
+
+        //delta frequency
+        double delta;
+	//to obtain dt i temporarily turn on the laser
+	cav.GetNewEF(las);
+	double dt = cav.GetDT();
+	//the cavity is reset before the real routine
+	cav.reset();
+
+        //number of samples
+        int N = int (  round((f2 - f1)/vel/dt)  );
+        delta = (f2 - f1)/(1.0*N);
+
+        //reflected intensity
+        double ir;
+        electric_field ef;
+
+        for(int j=0; j<N; j++)
+        {
+                las.SetFreq(f1 + delta*j);
+                cav.GetNewEF(las);
+                ef = cav.GetErefl();
+                ir = ef.Intensity();
+                out << setprecision(15);
+	       	out << delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
         }
         out.close();
         //laser frequency is set to the original frequency once again

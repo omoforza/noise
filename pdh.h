@@ -24,10 +24,18 @@ class pdh
 		//APPARATUS TESTING ROUTINES
 
 		//** Reflected intensity of the cavity alone as a function
-		//** of frequency. The results are saved in "ReflInt.txt"
+		//** of frequency. The results are saved in "ReflIntS.txt"
 		//** The first column is made up of frequencies, the
 		//** second contains intensities.
-		void ReflInt();
+		//** This routine is called "static" because the intensity
+		//** is measured at each frequency after the cavity is 
+		//** completely charged. The Dynamic ReflInt() routine
+		//** sweeps the frequency at a fixed MHz/s velocity and 
+		//** acquires dynamically the reflected intensity
+		void ReflIntStatic();
+		//** Results are in "ReflIntD.txt"
+		//** vel is a velocity in Hz/s  (e.g. 590MHz/s)
+		void ReflIntDynamic(double vel);
 
 		//** Reflected intensity as a function of time. The cavity
 		//** is not stabilized during this routine. The only
@@ -66,8 +74,8 @@ class pdh
 		amplifier Ampl{600.0e3};
 		//error signal amplification factor
 		const double AA = 1.0e10;
-
-		const double DPhase = PI*0.5;
+		//demodulation phase
+		const double DPhase = -0.5*PI;
 
 };
 #endif

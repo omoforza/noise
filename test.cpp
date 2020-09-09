@@ -3,9 +3,11 @@
 int main()
 {
 pdh p;
-//p.ReflInt();
+//da 500 a 10000 (oscilla)
+p.ReflIntDynamic(600.0e6);
+//p.ReflIntStatic();
 //p.ChargeCavity(false);
 //p.Sim(true);
-p.ErrorSignal();
+//p.ErrorSignal();
 return 0;
 }
