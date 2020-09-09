@@ -110,8 +110,8 @@ void pdh::ErrorSignal()
         //boundaries frequencies
         double f1,f2;
 
-        f1 = f_res - FSR*0.004;
-        f2 = f_res + FSR*0.004;
+        f1 = f_res - FSR*0.015;
+        f2 = f_res + FSR*0.015;
 
         //number of samples
         int N = 650000;

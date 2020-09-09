@@ -21,7 +21,7 @@ class amplifier
 	private:
 		//gain of the singles op-amp
 		double G;
-		AmpA AA{1000.0,100.0e-12};
+		AmpA AA{1000.0,820.0e-12};
 		AmpB BB{333.0,6.7e3,0.5,4.7e3,3.0e-12,G};
 		AmpC CC{4.7e3,4.7e3,0.5,4.7e3,3.0e-12,1.2e-9,G};
 		AmpC DD{4.7e3,4.7e3,0.5,22.0e3,3.0e-12,5.6e-9,G};
