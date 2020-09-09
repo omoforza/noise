@@ -10,7 +10,7 @@ class laser
 		// the laser is characterized by a frequency [Hz] and a 
 		// space coordinate  x [m]
 		laser(double lambda = 1064.0e-9, double x = 0.0,
-		      double intensity = 1.0) :
+		      double intensity = 40.0e-3) :
 			LAMBDA(lambda), X(x), INTENSITY(intensity)
 		{
 			Init();
@@ -47,6 +47,9 @@ class laser
 		//err signal [Hz]
 		void ErrSig(double);
 
+		//reset to initial frequency
+		void reset() {SetFreq(FREQ0);}
+
 
 	private:
 		//oscillator is a function of time that modulates the 
@@ -54,6 +57,8 @@ class laser
 		double oscillator(double);
 		void Init();
 		double FREQ;
+		//initially defined frequency
+		double FREQ0;
 		const double PI = acos(-1.0);
 		const double C = 299792458.0;
 		double LAMBDA;

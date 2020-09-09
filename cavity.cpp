@@ -29,9 +29,25 @@ void cavity::Init()
 	FSR = C/(2.0*L);
 }
 
+void cavity::reset()
+{
+	TIME	= 0.0;
+	DT	= 0.0;
+
+        Eplus.SetA  (0.0);
+        Eplus.SetPhi(0.0);
+        Erefl.SetA  (0.0);
+        Erefl.SetPhi(0.0);
+        Einc.SetA   (0.0);
+        Einc.SetPhi (0.0);
+        etemp.SetA   (0.0);
+        etemp.SetPhi (0.0);
+}
+
 void cavity::AssignLaser(laser & las)
 {
-	D0 = M1.GetX() - las.GetX();
+	D0	= M1.GetX() - las.GetX();
+	FRES	= round(las.GetFreq() / FSR)*FSR;
 }
 
 void cavity::GetNewEF(laser & las)
@@ -60,7 +76,7 @@ void cavity::rampa(laser & las)
 
 	//output file to store data
         ofstream out;
-        out.open("rampa.txt");
+        out.open("ReflInt.txt");
 
 	//turn off beta modulation depth	
 	double b = las.GetBeta();
@@ -69,19 +85,14 @@ void cavity::rampa(laser & las)
 	//laser frequency before rampa
 	const double freq0 = las.GetFreq();
 
-	//rampa will scan frequency around the nearer resonance frequency
-	double f_res;
-	//number of time the free spectral range frequency fit into
-	//the laser frequency
-	double nfsr = round(freq0/FSR);
-	//we fix the nearest resonce to laser frequency
-	f_res = FSR * nfsr;
+	//rampa will scan frequency around the nearest resonance frequency
+	double f_res = GetFres();
 
 	//freq boundariies of rampa
 	double f1,f2;
 
-	f1 = f_res - FSR*0.1;
-	f2 = f_res + FSR*0.1;
+	f1 = f_res - FSR*0.004;
+	f2 = f_res + FSR*0.004;
 
         //number of samples
         int N = 1000;
@@ -101,14 +112,14 @@ void cavity::rampa(laser & las)
 		//before the value of reflected field is stored
 		//this number SHOULD be adjusted depending on the
 		//reflectivity of mirrors
-                for(int i=0; i<1000; i++)
+                for(int i=0; i<7000; i++)
                 {
                         GetNewEF(las);
                 }
                 ef = GetErefl();
                 ir = ef.Intensity();
                 out <<setprecision(15) <<
-			las.GetFreq() << "\t" << ir << endl;
+			delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
                 //cavity reset before new acquisition
                 reset();
         }
@@ -116,5 +127,12 @@ void cavity::rampa(laser & las)
 	//laser frequency is set to the original frequency once again
 	las.SetFreq(freq0);
 	las.SetBeta(b);
+}
+
+
+void cavity::SetResFreq(laser & las)
+{
+	AssignLaser(las);
+	las.SetFreq(FRES);	
 }
 

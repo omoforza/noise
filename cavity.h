@@ -34,21 +34,27 @@ class cavity
 		void AssignLaser(laser &);
 
 		//Getters
-		double		GetDT()		{return DT;}
-		double		GetL()		{return L;}
-		double		GetTime()	{return TIME;}
-		electric_field	GetEinc()	{return Einc;}
-		electric_field 	GetErefl()	{return Erefl;}
-		electric_field 	GetEplus()	{return Eplus;}
+		double		GetDT()	   {return DT;}
+		double		GetL()	   {return L;}
+		double		GetTime()  {return TIME;}
+		electric_field	GetEinc()  {return Einc;}
+		electric_field 	GetErefl() {return Erefl;}
+		electric_field 	GetEplus() {return Eplus;}
+		double		GetIrefl() {return Erefl.Intensity();}
+		double		GetFres()  {return FRES;}
+		double		GetFSR()  {return FSR;}
 
 		//cavity reset function: all fields are set to zero
-		void reset() {Init();}
+		void reset();
 
 		//rampa is used to obtain the reflected intensity of
                 //a cavity as a function of laser frequency
 		//it scans the frequency around the nearer resonance to
 		//actual laser frequency
                 void rampa(laser &);
+
+		//set resonance frequency in the coupled laser
+		void SetResFreq(laser & las);
 
 	private:
 		//distance at equilibrium between laser and first mirror
@@ -93,6 +99,9 @@ class cavity
 
 		//speed of light in m/s
 		const double C = 299792458.0;
+
+		//resonance frequency associated to the associated laser
+		double FRES;
 };
 
 #endif

@@ -4,7 +4,12 @@
 #define ELECTRIC_FIELD_H
 
 #include<iostream>
+#include<complex>
 using std::ostream;
+using std::complex;
+using std::polar;
+using std::real;
+using std::imag;
 
 class electric_field
 {
@@ -14,7 +19,9 @@ class electric_field
 		electric_field(double a = 0.0, double phi = 0.0) :
 			A(a), PHI(phi)
 		{
-
+			E_C	= polar(A,PHI);
+			E_RE	= E_C.real();
+			E_IM	= E_C.imag();
 		}
 		
 		~electric_field() {}
@@ -23,13 +30,32 @@ class electric_field
 		{
 			A	= ef.A;
 			PHI	= ef.PHI;
+			E_C	= polar(ef.A,ef.PHI);
+			E_RE	= E_C.real();
+			E_IM	= E_C.imag();
+
 		}
 		
 		double GetA() const	{return A;} 
 		double GetPhi() const	{return PHI;}
 
-		void SetA(double a)		{A = a;}
-		void SetPhi(double phi)		{PHI = phi;}
+		double GetRe() const	{return E_RE;}
+		double GetIm() const	{return E_IM;}
+
+		void SetA(double a)
+		{
+			A = a;
+			E_C	= polar(A,PHI);
+			E_RE	= E_C.real();
+			E_IM	= E_C.imag();
+		}
+		void SetPhi(double phi)		
+		{
+			PHI = phi;
+			E_C	= polar(A,PHI);
+			E_RE	= E_C.real();
+			E_IM	= E_C.imag();
+		}
 
 		double Intensity();
 
@@ -48,6 +74,9 @@ class electric_field
 	private:
 		double A;
 		double PHI;
+		complex<double> E_C;
+		double E_RE;
+		double E_IM;
 };
 
 #endif
