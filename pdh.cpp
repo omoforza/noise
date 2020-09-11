@@ -119,11 +119,14 @@ void pdh::ReflIntDynamic(double vel)
         for(int j=0; j<N; j++)
         {
                 las.SetFreq(f1 + delta*j);
+                //las.SetFreq(f2 - delta*j);
                 cav.GetNewEF(las);
                 ef = cav.GetErefl();
                 ir = ef.Intensity();
                 out << setprecision(15);
+		//out << cav.GetTime() << "\t";
 	       	out << delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
+	       	//out << (f2-f1)*0.5 - delta*j << "\t" << ir << endl;
         }
         out.close();
         //laser frequency is set to the original frequency once again
@@ -204,6 +207,62 @@ void pdh::ErrorSignal()
 
         }
         out.close();
+}
+
+void pdh::ErrorStatic()
+{
+	cav.reset();
+        cav.AssignLaser(las);
+
+        //output file to store data
+        ofstream out;
+        out.open("ErrorStatic.txt");
+	out<<setprecision(15);
+
+        //this routine will  scan frequency around the nearest
+	//resonance frequency
+	double f_res 	= cav.GetFres();
+	double FSR	= cav.GetFSR();	
+
+        //boundaries frequencies
+        double f1,f2;
+
+        f1 = f_res - FSR*0.008;
+        f2 = f_res + FSR*0.008;
+
+        //number of samples
+        int N = 100;
+
+        //delta frequency
+        double delta;
+        delta = (f2 - f1)/(1.0*N);
+	double time, dt, intensity, temp;
+	bool ind = true;
+
+        for(int j=0; j<N; j++)
+        {
+		cav.reset();
+		las.reset();
+        	cav.AssignLaser(las);
+                las.SetFreq(f1 + delta*j);
+		for(int k = 0; k<10000; k++){
+                cav.GetNewEF(las);
+                time = cav.GetTime();
+                dt = cav.GetDT();
+                intensity = cav.GetIrefl();
+		temp = intensity;
+                temp = h1.filter(temp,dt);
+                temp = temp*sin(las.GetOmegaM()*time + DPhase);
+		temp = Ampl.LP(temp,dt); 
+		}
+                out << delta*j - (f2-f1)*0.5 << "\t";
+                out << intensity << "\t";
+                out << temp << endl;
+
+        }
+        out.close();
+	cav.reset();
+	las.reset();
 }
 
 void pdh::Sim(bool ampStatus)

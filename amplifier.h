@@ -18,6 +18,7 @@ class amplifier
 
 		double amp  (double, double, bool);
 		double ampID(double, double, bool, bool, ofstream &);
+		double LP(double, double);
 	private:
 		//gain of the singles op-amp
 		double G;

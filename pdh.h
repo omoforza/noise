@@ -50,6 +50,7 @@ class pdh
 		//** the resonance frequency. The values are all saved
 		//** into "ErrorSignal.txt"
 		void ErrorSignal();
+		void ErrorStatic();
 
 		//SIMULATION ROUTINES
 
