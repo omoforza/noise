@@ -18,7 +18,13 @@ class amplifier
 
 		double amp  (double, double, bool);
 		double ampID(double, double, bool, bool, ofstream &);
+
+		//low-pass filter stage only
 		double LP(double, double);
+
+		//the RESET function set to the default values all 
+		//internal tensions and parameters
+		void RESET();
 	private:
 		//gain of the singles op-amp
 		double G;

@@ -27,3 +27,7 @@ double AmpB::ampID(double Vin, double dt)
 	Vout = -G*R2/(R1+R2+G*R1)*Vin;
 	return Vout;
 }
+
+void AmpB::RESET(){
+Vout_old = 0.0;
+}

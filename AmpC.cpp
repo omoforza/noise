@@ -41,3 +41,11 @@ double AmpC::ampID(double Vin, double dt)
 	Vin_old = Vin;
 	return Vout;
 }
+
+void AmpC::RESET(){
+		V1 = 0.0;
+                V1_old = 0.0;
+                Vout = 0.0;
+                Vout_old = 0.0;
+                Vin_old = 0.0;
+}

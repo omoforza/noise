@@ -68,3 +68,13 @@ double amplifier::LP(double Vin, double dt){
 	return vtemp;
 
 }
+
+void amplifier::RESET(){
+	AA.RESET();
+	BB.RESET();
+	CC.RESET();
+	DD.RESET();
+	EE.RESET();
+	FF.RESET();
+	GG.RESET();
+}

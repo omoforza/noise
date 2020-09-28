@@ -231,7 +231,7 @@ void pdh::ErrorStatic()
         f2 = f_res + FSR*0.008;
 
         //number of samples
-        int N = 100;
+        int N = 1000;
 
         //delta frequency
         double delta;

@@ -18,6 +18,9 @@ class AmpA
 		double amp  (double, double);
 		double ampID(double, double);
 
+		//RESET function set all parameters to the initial value
+		void RESET();
+
 	private:
 		double R1;
 		double C1;
