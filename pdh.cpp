@@ -242,6 +242,7 @@ void pdh::ErrorStatic()
         for(int j=0; j<N; j++)
         {
 		cav.reset();
+		Ampl.RESET();
 		las.reset();
         	cav.AssignLaser(las);
                 las.SetFreq(f1 + delta*j);
