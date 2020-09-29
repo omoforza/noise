@@ -96,8 +96,8 @@ void pdh::ReflIntDynamic(double vel)
 
 	double FSR = cav.GetFSR();
 
-        f1 = f_res - FSR*0.015;
-        f2 = f_res + FSR*0.015;
+        f1 = f_res - FSR*0.004;
+        f2 = f_res + FSR*0.004;
 
 
         //delta frequency
@@ -238,9 +238,11 @@ void pdh::ErrorStatic()
         delta = (f2 - f1)/(1.0*N);
 	double time, dt, intensity, temp;
 	bool ind = true;
+	bool write = false;
 
         for(int j=0; j<N; j++)
         {
+		write = false;
 		cav.reset();
 		Ampl.RESET();
 		las.reset();
@@ -254,13 +256,16 @@ void pdh::ErrorStatic()
 		temp = intensity;
                 temp = h1.filter(temp,dt);
                 temp = temp*sin(las.GetOmegaM()*time + DPhase);
-		temp = Ampl.LP(temp,dt); 
+		if(k == 9999){
+			write = true;
+                	out << delta*j - (f2-f1)*0.5 << "\t";
+                	out << intensity << "\t";
+                	out << temp << endl;
 		}
-                out << delta*j - (f2-f1)*0.5 << "\t";
-                out << intensity << "\t";
-                out << temp << endl;
+                temp = Ampl.ampID(temp, dt, ind, write, out);
+		}//end k for
 
-        }
+        }//end of j for
         out.close();
 	cav.reset();
 	las.reset();
