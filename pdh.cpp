@@ -260,10 +260,12 @@ void pdh::ErrorStatic()
 			write = true;
                 	out << delta*j - (f2-f1)*0.5 << "\t";
                 	out << intensity << "\t";
-                	out << temp << endl;
+                	out << temp << "\t";
 		}
                 temp = Ampl.ampID(temp, dt, ind, write, out);
 		}//end k for
+		out << endl;
+		Ampl.RESET();
 
         }//end of j for
         out.close();
