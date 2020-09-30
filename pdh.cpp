@@ -156,7 +156,7 @@ void pdh::ChargeCavity(bool ind)
 	las.SetBeta(b);
 }
 
-void pdh::ErrorSignal()
+void pdh::ErrorSignal(double vel)
 {
 	cav.reset();
         cav.AssignLaser(las);
@@ -177,13 +177,19 @@ void pdh::ErrorSignal()
         f1 = f_res - FSR*0.015;
         f2 = f_res + FSR*0.015;
 
-        //number of samples
-        int N = 650000;
+	//to obtain dt I temporarily turn on the laser
+	cav.GetNewEF(las);
+	double dt = cav.GetDT();
+	//Reset of the cavity. after GetNewEF()
+	cav.reset();
 
+	//number of samples
+	int N = int ( round( (f2-f1)/vel/dt ) );
         //delta frequency
         double delta;
         delta = (f2 - f1)/(1.0*N);
-	double time, dt, intensity, temp;
+
+	double time, intensity, temp;
 	bool ind = true;
 
         for(int j=0; j<N; j++)

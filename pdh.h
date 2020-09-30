@@ -49,7 +49,8 @@ class pdh
 		//** PDH error signal as a function of frequency around
 		//** the resonance frequency. The values are all saved
 		//** into "ErrorSignal.txt"
-		void ErrorSignal();
+		//** This function depends on the sweeping velocity MHz/s
+		void ErrorSignal(double);
 
 		//** PDH error signal STATIC as a function of frequency 
 		//** around the resonance frequency. 
