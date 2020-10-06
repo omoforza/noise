@@ -60,3 +60,21 @@ if(WO){out<< vtemp << endl;}
 }
 return vtemp;
 }
+
+double amplifier::LP(double Vin, double dt){
+
+	double vtemp = 0.0;
+	vtemp = AA.ampID(Vin,dt);
+	return vtemp;
+
+}
+
+void amplifier::RESET(){
+	AA.RESET();
+	BB.RESET();
+	CC.RESET();
+	DD.RESET();
+	EE.RESET();
+	FF.RESET();
+	GG.RESET();
+}

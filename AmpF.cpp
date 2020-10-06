@@ -50,3 +50,12 @@ double AmpF::ampID(double Vin, double dt)
 	return Vout;
 }
 
+void AmpF::RESET(){
+                V1 = 0.0;
+                V1_old = 0.0;
+                Vout = 0.0;
+                Vout_old = 0.0;
+                Vin_old = 0.0;
+}
+
+

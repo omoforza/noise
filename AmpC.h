@@ -28,6 +28,10 @@ class AmpC
 		double amp  (double, double);
 		double ampID(double, double);
 
+		//RESET function set all parameters to the initial value
+                void RESET();
+
+
 	private:
 		void step1(double, double);
 

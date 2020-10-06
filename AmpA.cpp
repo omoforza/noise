@@ -17,3 +17,7 @@ double AmpA::amp(double Vin, double dt)
 	V_old = Vout;
 	return Vout;
 }
+
+void AmpA::RESET(){
+V_old = 0.0;
+}
