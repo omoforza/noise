@@ -79,7 +79,7 @@ class pdh
 		AmpA pz{50.0,1.0e-9};
 		amplifier Ampl{600.0e3};
 		//error signal amplification factor
-		const double AA = 1.0e10;
+		const double AA = 0.0;
 		//demodulation phase
 		const double DPhase = -0.5*PI;
 

@@ -292,7 +292,7 @@ void pdh::Sim(bool ampStatus)
 	cav.SetResFreq(las);	
 
 	double temp = 0.0;
-	bool ind = false;//turn on or off integration stages in the amp
+	bool ind = true;//turn on or off integration stages in the amp
 	for(int i=0; i<10000; i++)
 	{
 	        cav.GetNewEF(las);
