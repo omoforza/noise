@@ -116,17 +116,24 @@ void pdh::ReflIntDynamic(double vel)
         double ir;
         electric_field ef;
 
+	//test
+	cout << "Velocità = "<< delta/dt << " MHz/s"<< endl;
+
+        //las.SetFreq(f_res);
+        //for(int j=0; j<10000; j++){
+        //        cav.GetNewEF(las);
+	//}
+
         for(int j=0; j<N; j++)
         {
                 las.SetFreq(f1 + delta*j);
-                //las.SetFreq(f2 - delta*j);
+                //las.SetFreq(f_res);
                 cav.GetNewEF(las);
                 ef = cav.GetErefl();
                 ir = ef.Intensity();
                 out << setprecision(15);
 		//out << cav.GetTime() << "\t";
 	       	out << delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
-	       	//out << (f2-f1)*0.5 - delta*j << "\t" << ir << endl;
         }
         out.close();
         //laser frequency is set to the original frequency once again
@@ -209,7 +216,7 @@ void pdh::ChargeCavity(bool ind)
 	out.open("charge.txt");
 	out << setprecision(16);
 	electric_field ef;
-	for(int i = 0; i < 10000; i++)
+	for(int i = 0; i < 100000; i++)
 	{
 		cav.GetNewEF(las);
 		out << cav.GetTime() << "\t" << cav.GetIrefl() << endl;
