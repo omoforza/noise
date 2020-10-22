@@ -16,7 +16,7 @@ void laser::Init()
         K = 2.0*PI/LAMBDA;
 }
 
-electric_field laser::GetField(double d, double t)
+electric_field laser::GetField(double d, long double t)
 {
 	double phi, In;
 	electric_field ef;

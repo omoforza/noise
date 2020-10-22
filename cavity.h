@@ -91,8 +91,8 @@ class cavity
 		//the cavity is the clock ticking the time of the
 		//simulation. The roundtrip of radiation is our variable
 		//deltaT
-		double TIME = 0.0;
-		double DT = 0.0;
+		long double TIME = 0.0;
+		long double DT = 0.0;
 
 		//Theoretical free spectral range of the laser-cavity set
 		double FSR;
