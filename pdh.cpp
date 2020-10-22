@@ -219,7 +219,11 @@ void pdh::ChargeCavity(bool ind)
 	for(int i = 0; i < 100000; i++)
 	{
 		cav.GetNewEF(las);
-		out << cav.GetTime() << "\t" << cav.GetIrefl() << endl;
+		out << cav.GetTime() << "\t" << cav.GetIrefl()<<"\t";
+	        out << cav.GetErefl() << "\t";
+	        out << cav.GetEinc() << "\t";
+	        out << cav.GetEplus() << endl;
+		
 	}
 	out.close();
 	cav.reset();

@@ -5,8 +5,8 @@ int main()
 
 pdh p;
 //da 500 a 10000 (oscilla)
-//p.ReflIntDynamic(20000.0e6);
-p.ReflIntDynamicB(500.0e6);
+p.ReflIntDynamic(2000.0e6);
+//p.ReflIntDynamicB(500.0e6);
 
 //p.ReflIntStatic();
 
