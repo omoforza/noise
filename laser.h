@@ -34,7 +34,7 @@ class laser
 		//the field was emitted by the laser at time t - x/c
 		//d is the difference in lenght between the laser and the
 		//first mirror of the setup from the equilibrium position
-		electric_field GetField(double d, double t);
+		electric_field GetField(double d, long double t);
 
 		double GetX() {return X;}
 		double GetBeta() {return beta;}
