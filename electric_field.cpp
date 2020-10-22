@@ -47,6 +47,6 @@ electric_field operator - (const electric_field & ef1,
 
 ostream & operator <<(ostream & out, electric_field ef)
 {
-	out << "A = " << ef.GetA() << "; PHI = " << ef.GetPhi() ;
+	out <<  ef.GetA() << "\t" << ef.GetPhi() ;
 	return out;
 }
