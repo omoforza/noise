@@ -63,6 +63,7 @@ void pdh::ReflIntStatic()
                         delta*j-(f2-f1)*0.5L << "\t" << ir << endl;
                 //cavity reset before new acquisition
                 cav.reset();
+		las.reset();
         }
         out.close();
         //laser frequency is set to the original frequency once again
@@ -96,8 +97,8 @@ void pdh::ReflIntDynamic(long double vel)
 
 	long double FSR = cav.GetFSR();
 
-        f1 = f_res - FSR*0.001L;
-        f2 = f_res + FSR*0.001L;
+        f1 = f_res - FSR*0.004L;
+        f2 = f_res + FSR*0.004L;
 
 
         //delta frequency
@@ -132,7 +133,10 @@ void pdh::ReflIntDynamic(long double vel)
                 ir = ef.Intensity();
                 out << setprecision(15);
 		//out << cav.GetTime() << "\t";
-	       	out << delta*j-(f2-f1)*0.5L  <<	"\t" << ir << endl;
+	       	out << delta*j-(f2-f1)*0.5L  <<	"\t" << ir<< "\t";
+	        out << cav.GetErefl() << "\t";
+	        out << cav.GetEinc() << "\t";
+	        out << cav.GetEplus() << endl;
         }
         out.close();
         //laser frequency is set to the original frequency once again
@@ -225,6 +229,7 @@ void pdh::ChargeCavity(bool ind)
 	}
 	out.close();
 	cav.reset();
+	las.reset();
 	las.SetBeta(b);
 }
 
@@ -246,8 +251,8 @@ void pdh::ErrorSignal(long double vel)
         //boundaries frequencies
         long double f1,f2;
 
-        f1 = f_res - FSR*0.015L;
-        f2 = f_res + FSR*0.015L;
+        f1 = f_res - FSR*0.008L;
+        f2 = f_res + FSR*0.008L;
 
 	//to obtain dt I temporarily turn on the laser
 	cav.GetNewEF(las);
