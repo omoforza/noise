@@ -10,7 +10,7 @@ using std::cout;
 
 //evaluate the field intensity. the output is simply the squared value of
 //the amplitude
-double electric_field::Intensity()
+long double electric_field::Intensity()
 {
 	return A*A;
 }
@@ -21,7 +21,7 @@ electric_field operator + (const electric_field & ef1,
 		const electric_field & ef2)
 {
 	electric_field esum;
-	complex<double> sum;
+	complex<long double> sum;
 	sum = polar(ef1.GetA(), ef1.GetPhi()) + 
 		polar(ef2.GetA(), ef2.GetPhi());
 
@@ -35,7 +35,7 @@ electric_field operator - (const electric_field & ef1,
 		const electric_field & ef2)
 {
 	electric_field esum;
-	complex<double> sum;
+	complex<long double> sum;
 	sum = polar(ef1.GetA(), ef1.GetPhi()) - 
 		polar(ef2.GetA(), ef2.GetPhi());
 

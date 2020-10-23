@@ -13,21 +13,21 @@ using std::ofstream;
 class amplifier
 {
 	public:
-		amplifier(double g) : G(g) {}
+		amplifier(long double g) : G(g) {}
 
 
-		double amp  (double, double, bool);
-		double ampID(double, double, bool, bool, ofstream &);
+		long double amp  (long double, long double, bool);
+		long double ampID(long double, long double, bool, bool, ofstream &);
 
 		//low-pass filter stage only
-		double LP(double, double);
+		long double LP(long double, long double);
 
 		//the RESET function set to the default values all 
 		//internal tensions and parameters
 		void RESET();
 	private:
 		//gain of the singles op-amp
-		double G;
+		long double G;
 		AmpA AA{1000.0,820.0e-12};
 		AmpB BB{333.0,6.7e3,0.5,4.7e3,3.0e-12,G};
 		AmpC CC{4.7e3,4.7e3,0.5,4.7e3,3.0e-12,1.2e-9,G};

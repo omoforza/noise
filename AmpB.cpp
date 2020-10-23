@@ -4,12 +4,12 @@
 using std::cout;
 using std::endl;
 
-double AmpB::amp(double Vin, double dt)
+long double AmpB::amp(long double Vin, long double dt)
 {
-	double	Vout;
-	double	a = 1.0 + G*R1/(R1+R2) + R/(R1+R2) + R/Rout ;
-	double	b = R/(R1+R2) - G*R2/(R1+R2) ;
-	double	theta = R*Cout ;
+	long double	Vout;
+	long double	a = 1.0 + G*R1/(R1+R2) + R/(R1+R2) + R/Rout ;
+	long double	b = R/(R1+R2) - G*R2/(R1+R2) ;
+	long double	theta = R*Cout ;
 
 	Vout = (Vout_old + dt/theta*Vin*b)/(1.0 + dt/theta*a);
 
@@ -21,9 +21,9 @@ double AmpB::amp(double Vin, double dt)
 
 
 //ideal behavior
-double AmpB::ampID(double Vin, double dt)
+long double AmpB::ampID(long double Vin, long double dt)
 {
-	double Vout;
+	long double Vout;
 	Vout = -G*R2/(R1+R2+G*R1)*Vin;
 	return Vout;
 }

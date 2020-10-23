@@ -12,13 +12,13 @@ class mirror
 		//a is the absorption so that r*r+t*t = 1-a
 		//position in m from the laser or the origin
 		mirror(
-		double r = 0.5, 
-		double phir = 0.0, 
-		double at = 0.0,
-		double ar = 0.0, 
-		double t = 0.5, 
-		double phit = 0.0, 
-		double x = 0.0
+		long double r = 0.5L, 
+		long double phir = 0.0L, 
+		long double at = 0.0L,
+		long double ar = 0.0L, 
+		long double t = 0.5L, 
+		long double phit = 0.0L, 
+		long double x = 0.0L
 		):
 			R(r), PHIR(phir), AT(at), AR(ar), PHIT (phit),
 		       	T(t), X(x)
@@ -46,20 +46,20 @@ class mirror
 		electric_field transmit(electric_field);
 
 		//Getters
-		double GetX(){return X;}
-		double GetPhir() {return PHIR;}
+		long double GetX(){return X;}
+		long double GetPhir() {return PHIR;}
 
 		//Setters
-		void SetPhir(double phi) {PHIR = phi;}
+		void SetPhir(long double phi) {PHIR = phi;}
 
 	private:
-		double R;
-		double PHIR;
-		double PHIT;
-		double AT;
-		double AR;
-		double T;
-		double X;
+		long double R;
+		long double PHIR;
+		long double PHIT;
+		long double AT;
+		long double AR;
+		long double T;
+		long double X;
 };
 
 

@@ -16,7 +16,7 @@ class electric_field
 	public:
 		//A and PHI are the field amplitude and phase
 		//|A|exp(i(PHI))
-		electric_field(double a = 0.0, double phi = 0.0) :
+		electric_field(long double a=0.0L, long double phi=0.0L) :
 			A(a), PHI(phi)
 		{
 			E_C	= polar(A,PHI);
@@ -36,20 +36,20 @@ class electric_field
 
 		}
 		
-		double GetA() const	{return A;} 
-		double GetPhi() const	{return PHI;}
+		long double GetA() const	{return A;} 
+		long double GetPhi() const	{return PHI;}
 
-		double GetRe() const	{return E_RE;}
-		double GetIm() const	{return E_IM;}
+		long double GetRe() const	{return E_RE;}
+		long double GetIm() const	{return E_IM;}
 
-		void SetA(double a)
+		void SetA(long double a)
 		{
 			A = a;
 			E_C	= polar(A,PHI);
 			E_RE	= E_C.real();
 			E_IM	= E_C.imag();
 		}
-		void SetPhi(double phi)		
+		void SetPhi(long double phi)		
 		{
 			PHI = phi;
 			E_C	= polar(A,PHI);
@@ -57,7 +57,7 @@ class electric_field
 			E_IM	= E_C.imag();
 		}
 
-		double Intensity();
+		long double Intensity();
 
 		//overloading of the + operator
 		friend electric_field operator + 
@@ -72,11 +72,11 @@ class electric_field
 			(ostream &, electric_field);
 
 	private:
-		double A;
-		double PHI;
-		complex<double> E_C;
-		double E_RE;
-		double E_IM;
+		long double A;
+		long double PHI;
+		complex<long double> E_C;
+		long double E_RE;
+		long double E_IM;
 };
 
 #endif

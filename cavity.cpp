@@ -18,30 +18,30 @@ void cavity::Init()
 	L = abs( M1.GetX() - M2.GetX() );
 
 	//phase and amplitude of all fields are initially set to 0.0
-	Eplus.SetA  (0.0);
-	Eplus.SetPhi(0.0);
-	Erefl.SetA  (0.0);
-	Erefl.SetPhi(0.0);
-	Einc.SetA   (0.0);
-	Einc.SetPhi (0.0);
+	Eplus.SetA  (0.0L);
+	Eplus.SetPhi(0.0L);
+	Erefl.SetA  (0.0L);
+	Erefl.SetPhi(0.0L);
+	Einc.SetA   (0.0L);
+	Einc.SetPhi (0.0L);
 
 	//the free spectral range frequency
-	FSR = C/(2.0*L);
+	FSR = C/(2.0L*L);
 }
 
 void cavity::reset()
 {
-	TIME	= 0.0;
-	DT	= 0.0;
+	TIME	= 0.0L;
+	DT	= 0.0L;
 
-        Eplus.SetA  (0.0);
-        Eplus.SetPhi(0.0);
-        Erefl.SetA  (0.0);
-        Erefl.SetPhi(0.0);
-        Einc.SetA   (0.0);
-        Einc.SetPhi (0.0);
-        etemp.SetA   (0.0);
-        etemp.SetPhi (0.0);
+        Eplus.SetA  (0.0L);
+        Eplus.SetPhi(0.0L);
+        Erefl.SetA  (0.0L);
+        Erefl.SetPhi(0.0L);
+        Einc.SetA   (0.0L);
+        Einc.SetPhi (0.0L);
+        etemp.SetA   (0.0L);
+        etemp.SetPhi (0.0L);
 }
 
 void cavity::AssignLaser(laser & las)
@@ -65,8 +65,8 @@ void cavity::GetNewEF(laser & las)
 	Erefl = M1.ex_reflect(Einc) + M1.transmit(etemp);
 
 	//update of the time variable
-	TIME = TIME + 2.0*L/C;
-	DT = 2.0*L/C;
+	TIME = TIME + 2.0L*L/C;
+	DT = 2.0L*L/C;
 }
 
 
@@ -79,30 +79,30 @@ void cavity::rampa(laser & las)
         out.open("ReflInt.txt");
 
 	//turn off beta modulation depth	
-	double b = las.GetBeta();
-	las.SetBeta(0.0);
+	long double b = las.GetBeta();
+	las.SetBeta(0.0L);
 
 	//laser frequency before rampa
-	const double freq0 = las.GetFreq();
+	const long double freq0 = las.GetFreq();
 
 	//rampa will scan frequency around the nearest resonance frequency
-	double f_res = GetFres();
+	long double f_res = GetFres();
 
 	//freq boundariies of rampa
-	double f1,f2;
+	long double f1,f2;
 
-	f1 = f_res - FSR*0.004;
-	f2 = f_res + FSR*0.004;
+	f1 = f_res - FSR*0.004L;
+	f2 = f_res + FSR*0.004L;
 
         //number of samples
         int N = 1000;
 
         //delta frequency
-        double delta;
-        delta = (f2 - f1)/(1.0*N);
+        long double delta;
+        delta = (f2 - f1)/(1.0L*N);
 
         //reflected intensity
-        double ir;
+        long double ir;
         electric_field ef;
 
         for(int j=0; j<N; j++)
@@ -119,7 +119,7 @@ void cavity::rampa(laser & las)
                 ef = GetErefl();
                 ir = ef.Intensity();
                 out <<setprecision(15) <<
-			delta*j-(f2-f1)*0.5 << "\t" << ir << endl;
+			delta*j-(f2-f1)*0.5L << "\t" << ir << endl;
                 //cavity reset before new acquisition
                 reset();
         }

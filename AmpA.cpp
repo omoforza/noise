@@ -1,17 +1,17 @@
 #include"AmpA.h"
 
-double AmpA::ampID(double Vin, double dt)
+long double AmpA::ampID(long double Vin, long double dt)
 {
-	double Vout;
+	long double Vout;
 	Vout = (V_old + (dt/C1)/R1*Vin)/(1.0+(dt/C1)/R1);
 	//store the new V_old value
 	V_old = Vout;
 	return Vout;
 }
 
-double AmpA::amp(double Vin, double dt)
+long double AmpA::amp(long double Vin, long double dt)
 {
-	double Vout;
+	long double Vout;
 	Vout = (V_old + dt/C1/R1*Vin)/(1.0+(dt/C1)/R1);
 	//store the new V_old value
 	V_old = Vout;

@@ -34,15 +34,15 @@ class cavity
 		void AssignLaser(laser &);
 
 		//Getters
-		double		GetDT()	   {return DT;}
-		double		GetL()	   {return L;}
-		double		GetTime()  {return TIME;}
+		long double		GetDT()	   {return DT;}
+		long double		GetL()	   {return L;}
+		long double		GetTime()  {return TIME;}
 		electric_field	GetEinc()  {return Einc;}
 		electric_field 	GetErefl() {return Erefl;}
 		electric_field 	GetEplus() {return Eplus;}
-		double		GetIrefl() {return Erefl.Intensity();}
-		double		GetFres()  {return FRES;}
-		double		GetFSR()  {return FSR;}
+		long double		GetIrefl() {return Erefl.Intensity();}
+		long double		GetFres()  {return FRES;}
+		long double		GetFSR()  {return FSR;}
 
 		//cavity reset function: all fields are set to zero
 		void reset();
@@ -59,7 +59,7 @@ class cavity
 	private:
 		//distance at equilibrium between laser and first mirror
 		//of the cavity
-		double D0 = 0.0;
+		long double D0 = 0.0L;
 
 		//class initialization function
 		void Init();
@@ -72,7 +72,7 @@ class cavity
 
 		//cavity length L is defined as the distance between
 		//the two mirror M1 and M2
-		double L;
+		long double L;
 
 		//this field corresponds to the right moving
 		// internal field (laser ---->>> cavity)
@@ -91,17 +91,17 @@ class cavity
 		//the cavity is the clock ticking the time of the
 		//simulation. The roundtrip of radiation is our variable
 		//deltaT
-		long double TIME = 0.0;
-		long double DT = 0.0;
+		long double TIME = 0.0L;
+		long double DT = 0.0L;
 
 		//Theoretical free spectral range of the laser-cavity set
-		double FSR;
+		long double FSR;
 
 		//speed of light in m/s
-		const double C = 299792458.0;
+		const long double C = 299792458.0L;
 
 		//resonance frequency associated to the associated laser
-		double FRES;
+		long double FRES;
 };
 
 #endif

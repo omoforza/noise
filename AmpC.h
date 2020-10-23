@@ -5,13 +5,13 @@ class AmpC
 {
 	public:
 		AmpC(
-		double r1 = 4.7e3,
-		double r2 = 4.7e3, 
-		double r = 0.5,
-		double rout = 4.7e3, 
-		double cout = 3.0e-12,
-		double c1 = 5.6e-9, 
-		double g = 600.0e3
+		long double r1 = 4.7e3,
+		long double r2 = 4.7e3, 
+		long double r = 0.5,
+		long double rout = 4.7e3, 
+		long double cout = 3.0e-12,
+		long double c1 = 5.6e-9, 
+		long double g = 600.0e3
 		):
 
 		R1(r1), R2(r2), R(r), Rout(rout), Cout(cout), C1(c1), G(g)
@@ -25,33 +25,33 @@ class AmpC
 		}
 
 		~AmpC(){}
-		double amp  (double, double);
-		double ampID(double, double);
+		long double amp  (long double, long double);
+		long double ampID(long double, long double);
 
 		//RESET function set all parameters to the initial value
                 void RESET();
 
 
 	private:
-		void step1(double, double);
+		void step1(long double, long double);
 
-		double	Rout;
-		double	R;
-		double	Cout; 
-		double	G; 
+		long double	Rout;
+		long double	R;
+		long double	Cout; 
+		long double	G; 
 		
-		double	R1;
-		double	R2;
-		double	C1;
+		long double	R1;
+		long double	R2;
+		long double	C1;
 
 		//step1 outputs
-		double	V1;
-		double	V1_old;
+		long double	V1;
+		long double	V1_old;
 
 		//step2 outputs and input old
-		double	Vout;
-		double	Vout_old;
-		double	Vin_old;
+		long double	Vout;
+		long double	Vout_old;
+		long double	Vin_old;
 };
 
 #endif

@@ -26,18 +26,18 @@ int main()
 hpf a;
 
 default_random_engine         generator(84743367);
-normal_distribution<double>   normal(0.0L,1.0L);
+normal_distribution<long double>   normal(0.0L,1.0L);
 
 ofstream file;
 
 file.open("op_amp.txt");
 
-double in, out, time;
+long double in, out, time;
 int N = 100000;
-double TMAX = 1.0; //seconds
-double dt = TMAX/(1.0*N);
-double * fft_in  = new double[N];
-double * fft_in1 = new double[N];
+long double TMAX = 1.0; //seconds
+long double dt = TMAX/(1.0*N);
+long double * fft_in  = new long double[N];
+long double * fft_in1 = new long double[N];
 for(int i=0; i<N; i++)
 {
 	time = dt*i;
@@ -70,7 +70,7 @@ fftw_execute(p1);
 
 ofstream file_fft;
 file_fft.open("fftOUT.txt");
-double df = 1.0/TMAX;
+long double df = 1.0/TMAX;
 for(int i = 0; i<N/2+1; i++)
 {
 	file_fft << df*i << "\t" << fft_out[i][0]*fft_out[i][0] <<"\t"<< fft_out1[i][0]*fft_out1[i][0] << endl;
