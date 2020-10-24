@@ -370,7 +370,7 @@ void pdh::Sim(bool ampStatus)
 
 	long double temp = 0.0L;
 	bool ind = true;//turn on or off integration stages in the amp
-	for(int i=0; i<10000; i++)
+	for(int i=0; i<100000; i++)
 	{
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();

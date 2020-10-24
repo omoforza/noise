@@ -11,10 +11,10 @@ pdh p;
 //p.ReflIntStatic();
 
 //if true the cavity is charged at resonance
-p.ChargeCavity(true);
+//p.ChargeCavity(true);
 
-//p.Sim(true);
-//p.ErrorSignal(1500.0e6);
+p.Sim(false);
+//p.ErrorSignal(500.0e6);
 //p.ErrorStatic();
 
 return 0;
