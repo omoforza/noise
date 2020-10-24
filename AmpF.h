@@ -5,14 +5,14 @@ class AmpF
 {
 	public:
 		AmpF(
-		double r1 = 4.7e3,
-		double r2 = 100.0,//5.6 
-		double r3 = 1.0e6,
-		double r = 0.5, 
-		double rout = 1000.0, 
-		double cout = 3.0e-12, 
-		double c1 = 1.0e-6, 
-		double g = 600.0e3
+		long double r1 = 4.7e3,
+		long double r2 = 100.0,//5.6 
+		long double r3 = 1.0e6,
+		long double r = 0.5, 
+		long double rout = 1000.0, 
+		long double cout = 3.0e-12, 
+		long double c1 = 1.0e-6, 
+		long double g = 600.0e3
 		):
 
 		R1(r1), R2(r2), R3(r3), R(r), Rout(rout), Cout(cout),
@@ -25,33 +25,33 @@ class AmpF
 			Vin_old = 0.0;
 		}
 
-		double amp  (double, double);
-		double ampID(double, double);
+		long double amp  (long double, long double);
+		long double ampID(long double, long double);
 
 		//RESET function set all parameters to the initial value
                 void RESET();
 
 	private:
-		double     R1;
-		double     R2;
-		double     R3;
-		double     C1;
-		double      R;
-		double   Rout;
-		double   Cout;
-		double   G;
+		long double     R1;
+		long double     R2;
+		long double     R3;
+		long double     C1;
+		long double      R;
+		long double   Rout;
+		long double   Cout;
+		long double   G;
 
 		//first step of integration
-		void step1(double, double);
+		void step1(long double, long double);
 
 		//step1 outputs
-		double V1;
-		double V1_old;
+		long double V1;
+		long double V1_old;
 
 		//final step outputs and inputs
-		double Vout;
-		double Vout_old;
-		double Vin_old;
+		long double Vout;
+		long double Vout_old;
+		long double Vin_old;
 };
 
 #endif

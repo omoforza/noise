@@ -19,7 +19,7 @@ class pdh
 		~pdh	(){}
 
 
-		double GetLasFreq(){return las.GetFreq();}
+		long double GetLasFreq(){return las.GetFreq();}
 
 		//APPARATUS TESTING ROUTINES
 
@@ -35,10 +35,10 @@ class pdh
 		void ReflIntStatic();
 		//** Results are in "ReflIntD.txt"
 		//** vel is a velocity in Hz/s  (e.g. 590MHz/s)
-		void ReflIntDynamic(double vel);
+		void ReflIntDynamic(long double vel);
 		//** as above but starting from the maximum frequency
 		//** going toward the minimum
-		void ReflIntDynamicB(double vel);
+		void ReflIntDynamicB(long double vel);
 
 		//** Reflected intensity as a function of time. The cavity
 		//** is not stabilized during this routine. The only
@@ -53,7 +53,7 @@ class pdh
 		//** the resonance frequency. The values are all saved
 		//** into "ErrorSignal.txt"
 		//** This function depends on the sweeping velocity MHz/s
-		void ErrorSignal(double);
+		void ErrorSignal(long double);
 
 		//** PDH error signal STATIC as a function of frequency 
 		//** around the resonance frequency. 
@@ -71,20 +71,20 @@ class pdh
 
 	private:
 		//all constant MUST be defined before they are used.
-		const double C = 299792458.0;
-		const double PI = acos(-1.0);
+		const long double C = 299792458.0L;
+		const long double PI = acos(-1.0L);
 		laser las;
-		double R = 0.99826;
-		mirror m1{sqrt(R),PI,.0,.0,sqrt(1.- R),.0,.1};
-		mirror m2{sqrt(R),PI,.0,.0,sqrt(1.- R),.0,.985};
+		long double R = 0.99826L;
+		mirror m1{sqrt(R),PI,.0L,.0L,sqrt(1.0L- R),.0L,.1L};
+		mirror m2{sqrt(R),PI,.0L,.0L,sqrt(1.0L- R),.0L,.985L};
 		cavity cav{m1,m2};
 		hpf h1;
-		AmpA pz{50.0,1.0e-9};
-		amplifier Ampl{600.0e3};
+		AmpA pz{50.0L,1.0e-9L};
+		amplifier Ampl{600.0e3L};
 		//error signal amplification factor
-		const double AA = 0.0;
+		const long double AA = 1.0e6L;
 		//demodulation phase
-		const double DPhase = -0.5*PI;
+		const long double DPhase = -0.5L*PI;
 
 };
 #endif

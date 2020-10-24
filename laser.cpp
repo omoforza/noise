@@ -12,31 +12,42 @@ void laser::Init()
 {
 	FREQ = C/LAMBDA;
 	FREQ0 = FREQ;
-        OMEGA = 2.0*PI*FREQ;
-        K = 2.0*PI/LAMBDA;
+        OMEGA = 2.0L*PI*FREQ;
+        K = 2.0L*PI/LAMBDA;
 }
 
-electric_field laser::GetField(double d, long double t)
+void laser::reset()
 {
-	double phi, In;
+	SetFreq(FREQ0);
+	T_OLD = 0.0L;
+	PHI_OM_OLD=0.0L;
+}
+
+electric_field laser::GetField(long double d, long double t)
+{
+	long double phi, In;
 	electric_field ef;
+	long double dt = t - T_OLD;
 	//phase of the emitted field when it reaches x at time t
-	phi = K*d - OMEGA*(t - d/(2.0*C)) + oscillator(t - d/(2.0*C));
+	phi = K*d - PHI_OM_OLD - OMEGA*(dt - d/(2.0L*C)) 
+		+ oscillator(t - d/(2.0L*C));
 	//intensity of the field
 	In = INTENSITY;
 	ef.SetA(In);
 	ef.SetPhi(phi);
+	T_OLD = t;
+	PHI_OM_OLD = PHI_OM_OLD + OMEGA*(dt - d/(2.0L*C));
 	return ef;
 }
 
-double laser::oscillator(double t)
+long double laser::oscillator(long double t)
 {
-double dphi = beta*sin(omegaM*t);
+long double dphi = beta*sin(omegaM*t);
 return dphi;
 }
 
 
-void laser::ErrSig(double err)
+void laser::ErrSig(long double err)
 {
 	SetFreq(FREQ + err);
 }

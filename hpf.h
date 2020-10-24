@@ -5,8 +5,8 @@ class hpf
 {
 	public:
 		hpf(
-		double r = 10.0e3, 
-		double l = 30.0e-3
+		long double r = 10.0e3, 
+		long double l = 30.0e-3
 		):
 		R(r),L(l)
 		{
@@ -17,12 +17,12 @@ class hpf
 
 		//this function act as an high pass filter
 		//on the intensity current signal from the photodiode
-		double filter(double, double);
+		long double filter(long double, long double);
 	private:
-		double L;
-		double R;
-		double Vin;
-		double I_old;
-		double V_old;
+		long double L;
+		long double R;
+		long double Vin;
+		long double I_old;
+		long double V_old;
 };
 #endif

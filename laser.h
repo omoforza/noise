@@ -2,15 +2,15 @@
 #define LASER_H
 
 #include"electric_field.h"
-#include<cmath>
+#include<math.h>
 
 class laser
 {
 	public:
 		// the laser is characterized by a frequency [Hz] and a 
 		// space coordinate  x [m]
-		laser(double lambda = 1064.0e-9, double x = 0.0,
-		      double intensity = 1.0) :
+		laser(long double lambda=1064.0e-9L, long double x=0.0L,
+		      long double intensity = 1.0L) :
 			LAMBDA(lambda), X(x), INTENSITY(intensity)
 		{
 			Init();
@@ -18,58 +18,60 @@ class laser
 		~laser() {}
 
 
-		void SetFreq(double freq)
+		void SetFreq(long double freq)
 		{
 			LAMBDA = C/freq;
 			FREQ = freq;
-			OMEGA = 2.0*PI*freq;
-        		K = 2.0*PI/LAMBDA;
+			OMEGA = 2.0L*PI*freq;
+        		K = 2.0L*PI/LAMBDA;
 		}
 
-		void SetBeta(double b){beta = b;}
+		void SetBeta(long double b){beta = b;}
 
-		double GetIntensity() {return INTENSITY;}
+		long double GetIntensity() {return INTENSITY;}
 		
 		//this function give the electric field in x at time t
 		//the field was emitted by the laser at time t - x/c
 		//d is the difference in lenght between the laser and the
 		//first mirror of the setup from the equilibrium position
-		electric_field GetField(double d, long double t);
+		electric_field GetField(long double d, long double t);
 
-		double GetX() {return X;}
-		double GetBeta() {return beta;}
+		long double GetX() {return X;}
+		long double GetBeta() {return beta;}
 
-		double GetFreq(){return FREQ;}
+		long double GetFreq(){return FREQ;}
 
-		double GetOmegaM(){return omegaM;}
+		long double GetOmegaM(){return omegaM;}
 
 		//error signal function fed to the laser
 		//err signal [Hz]
-		void ErrSig(double);
+		void ErrSig(long double);
 
 		//reset to initial frequency
-		void reset() {SetFreq(FREQ0);}
+		void reset();
 
 
 	private:
 		//oscillator is a function of time that modulates the 
 		//phase of the emitted field
-		double oscillator(double);
+		long double oscillator(long double);
 		void Init();
-		double FREQ;
+		long double FREQ;
 		//initially defined frequency
-		double FREQ0;
-		const double PI = acos(-1.0);
-		const double C = 299792458.0;
-		double LAMBDA;
-		double K;
-		double OMEGA;
-		double X;
-		double INTENSITY;
+		long double FREQ0;
+		const long double PI = acos(-1.0L);
+		const long double C = 299792458.0L;
+		long double LAMBDA;
+		long double K;
+		long double OMEGA;
+		long double X;
+		long double T_OLD=0.0L;
+		long double PHI_OM_OLD=0.0L;
+		long double INTENSITY;
 		//phase modulation depth
-		double beta		= 0.0;
-		const double freqM 	= 717.7e3;
-		const double omegaM	= 2.0*PI*freqM;
+		long double beta		= 1.1L;
+		const long double freqM 	= 717.7e3L;
+		const long double omegaM	= 2.0L*PI*freqM;
 };
 
 #endif
