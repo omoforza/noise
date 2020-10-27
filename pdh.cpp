@@ -285,7 +285,6 @@ void pdh::ErrorSignal(long double vel)
                 out << temp << "\t";
                 temp = Ampl.ampID(temp, dt, ind, true, out);
 		temp = pz.ampID(temp,dt);
-                temp = temp*AA;
                 out << temp << endl;
 
         }
@@ -304,7 +303,7 @@ void pdh::ErrorStatic()
 
         //this routine will  scan frequency around the nearest
 	//resonance frequency
-	long double f_res 	= cav.GetFres();
+	long double f_res = cav.GetFres();
 	long double FSR	= cav.GetFSR();	
 
         //boundaries frequencies
@@ -367,24 +366,81 @@ void pdh::Sim(bool ampStatus)
 	long double intensity;
 	
 	cav.SetResFreq(las);	
+	long double res_freq = las.GetFreq();
 
 	long double temp = 0.0L;
-	bool ind = true;//turn on or off integration stages in the amp
+	bool ind = false;//turn on or off integration stages in the amp
+
+	ampStatus = true;
+	ind = true;
 	for(int i=0; i<100000; i++)
 	{
+		if(i == 10000){
+			ind = true; 
+			ampStatus = true;
+		}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
 	        out << time << "\t";
+		out << las.GetFreq()-res_freq << "\t";
 	        intensity = cav.GetIrefl();
 	        out << intensity << "\t";
 	        temp = h1.filter(intensity,dt);
 	        temp = temp*sin(las.GetOmegaM()*time + DPhase);
 	        temp = Ampl.ampID(temp, dt, ind, false, out);
+		//temp = Ampl.LP(temp,dt);
 		temp = pz.ampID(temp,dt);
-	        temp = temp*AA;
+	        temp = -1.0L*temp*AA;
 		if(ampStatus) {las.ErrSig(temp);}
 	        out << temp << endl;
 	}
 	out.close();
+}
+
+void pdh::ErrorEvolution()
+{
+	cav.reset();
+        cav.AssignLaser(las);
+
+        //output file to store data
+        ofstream out;
+        out.open("ErrorEvolution.txt");
+	out<<setprecision(15);
+
+        //this routine will  scan frequency around the nearest
+	//resonance frequency
+	long double f_res = cav.GetFres();
+	long double FSR	= cav.GetFSR();	
+
+       
+	long double time, dt, intensity, temp;
+
+	cav.reset();
+	Ampl.RESET();
+	las.reset();
+       	cav.AssignLaser(las);
+
+        las.SetFreq(f_res - 100.0L);
+
+	for(int k = 0; k<100000; k++){
+              	cav.GetNewEF(las);
+      		time = cav.GetTime();
+      		dt = cav.GetDT();
+              	intensity = cav.GetIrefl();
+		temp = intensity;
+               	temp = h1.filter(temp,dt);
+               	temp = temp*sin(las.GetOmegaM()*time + DPhase);
+               	out <<time<<"\t" << intensity << "\t";
+               	temp = Ampl.ampID(temp, dt, true, false, out);
+		out << temp << "\t";
+		temp = pz.ampID(temp,dt);
+		out << temp << "\t";
+                temp = -1.0L*temp*AA;
+		out << temp << endl;
+	}//end k for
+	Ampl.RESET();
+        out.close();
+	cav.reset();
+	las.reset();
 }

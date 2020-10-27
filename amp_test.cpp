@@ -15,15 +15,17 @@ int main()
 {
 	srand (5545218);
 
-	AmpC amp;
+	AmpA amp;
 
 	//number of samples (even number!)
 	int N = 100000;
 	long double * input = new long double[N];
-	long double dt = 1.0e-5L;//3.0e-9
+	long double dt = 3.0e-9L;
 	for(int i=0; i<N; i++)
 	{
 		input[i] = amp.ampID(rand()/double(RAND_MAX)-0.5L, dt);	
+		//input[i] = 1.0L*rand()/double(RAND_MAX)*
+		//sin(2.0L*M_PI*3500.0L*dt*i);	
 	}
 
 	
@@ -41,7 +43,7 @@ int main()
 	out.open("amp_test.txt");
 
 	for(int i=0; i<N/2; i++){
-		out << (output[i][0]*output[i][0] + 
+		out <<1.0L/(N*dt)*i<<"\t" << (output[i][0]*output[i][0] + 
 			output[i][1]*output[i][1])<< endl;	
 	}
 	out.close();

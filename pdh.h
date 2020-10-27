@@ -60,6 +60,10 @@ class pdh
 		//** The values are all saved into "ErrorStatic.txt"
 		void ErrorStatic();
 
+		//** PDH error signal as a function of time fixing the
+		//** laser frequency
+		void ErrorEvolution();
+
 		//SIMULATION ROUTINES
 
 		//** This routine is the actual simulation, the error 
@@ -82,7 +86,7 @@ class pdh
 		AmpA pz{50.0L,1.0e-9L};
 		amplifier Ampl{600.0e3L};
 		//error signal amplification factor
-		const long double AA = 1.0e6L;
+		const long double AA = 4.0e7L;
 		//demodulation phase
 		const long double DPhase = -0.5L*PI;
 
