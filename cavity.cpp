@@ -27,6 +27,7 @@ void cavity::Init()
 
 	//the free spectral range frequency
 	FSR = C/(2.0L*L);
+	DT0 = 2.0L*L/C;
 }
 
 void cavity::reset()
@@ -48,13 +49,16 @@ void cavity::AssignLaser(laser & las)
 {
 	D0	= M1.GetX() - las.GetX();
 	FRES	= round(las.GetFreq() / FSR)*FSR;
+	las.SetL0(L);
 }
 
 void cavity::GetNewEF(laser & las)
 {
+	DT = 2.0L*L/C;
+	RES_T = RES_T + (DT-DT0);
 	//The new Einc field is defined on the outer layer of
 	//the first mirror
-	Einc = las.GetField((M1.GetX()-las.GetX()) - D0, TIME);
+	Einc = las.GetField((M1.GetX()-las.GetX()) - D0, RES_T);
 
 	//eplus
 	etemp = M2.reflect(Eplus);
@@ -66,7 +70,6 @@ void cavity::GetNewEF(laser & las)
 
 	//update of the time variable
 	TIME = TIME + 2.0L*L/C;
-	DT = 2.0L*L/C;
 }
 
 
