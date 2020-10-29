@@ -27,7 +27,6 @@ class laser
 		}
 
 		void SetBeta(long double b){beta = b;}
-		void SetL0(long double l){L0 = l;}
 
 		long double GetIntensity() {return INTENSITY;}
 		
@@ -65,14 +64,14 @@ class laser
 		long double LAMBDA;
 		long double K;
 		long double OMEGA;
-		int N_COUNT=0;
 		long double X;
+		long double T_OLD=0.0L;
+		long double PHI_OM_OLD=0.0L;
 		long double INTENSITY;
 		//phase modulation depth
 		long double beta		= 0.05L;
 		const long double freqM 	= 717.7e3L;
 		const long double omegaM	= 2.0L*PI*freqM;
-		long double L0 = 0;
 };
 
 #endif

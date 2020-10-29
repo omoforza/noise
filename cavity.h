@@ -102,9 +102,6 @@ class cavity
 
 		//resonance frequency associated to the associated laser
 		long double FRES;
-
-		long double DT0 = 0.0L;
-		long double RES_T = 0.0L;
 };
 
 #endif
