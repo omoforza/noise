@@ -35,6 +35,7 @@ class cavity
 
 		//Getters
 		long double		GetDT()	   {return DT;}
+		long double		GetDT0()   {return DT0;}
 		long double		GetL()	   {return L;}
 		long double		GetTime()  {return TIME;}
 		electric_field	GetEinc()  {return Einc;}

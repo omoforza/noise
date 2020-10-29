@@ -103,11 +103,7 @@ void pdh::ReflIntDynamic(long double vel)
 
         //delta frequency
         long double delta;
-	//to obtain dt i temporarily turn on the laser
-	cav.GetNewEF(las);
-	long double dt = cav.GetDT();
-	//the cavity is reset before the real routine
-	cav.reset();
+	long double dt = cav.GetDT0();
 
         //number of samples
         int N = int (  round((f2 - f1)/vel/dt)  );
@@ -120,11 +116,6 @@ void pdh::ReflIntDynamic(long double vel)
 	//test
 	cout << "Velocità = "<< delta/dt << " MHz/s"<< endl;
 
-        //las.SetFreq(f_res);
-        //for(int j=0; j<10000; j++){
-        //        cav.GetNewEF(las);
-	//}
-
         for(int j=0; j<N; j++)
         {
                 las.SetFreq(f1 + delta*j);
@@ -132,18 +123,20 @@ void pdh::ReflIntDynamic(long double vel)
                 ef = cav.GetErefl();
                 ir = ef.Intensity();
                 out << setprecision(15);
-		//out << cav.GetTime() << "\t";
-	       	out << delta*j-(f2-f1)*0.5L  <<	"\t" << ir<< "\t";
+	       	out << delta*j-(f2-f1)*0.5L<<"\t";
+	        out << ir<< "\t";
 	        out << cav.GetErefl() << "\t";
 	        out << cav.GetEinc() << "\t";
 	        out << cav.GetEplus() << endl;
         }
         out.close();
+
         //laser frequency is set to the original frequency once again
         las.SetFreq(freq0);
         las.SetBeta(b);
 
 	cav.reset();
+	las.reset();
 }
 
 void pdh::ChargeCavity(bool in_res)
