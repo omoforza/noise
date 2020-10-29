@@ -114,7 +114,7 @@ void pdh::ReflIntDynamic(long double vel)
         electric_field ef;
 
 	//test
-	cout << "Velocità = "<< delta/dt << " MHz/s"<< endl;
+	cout << "Velocità = "<< delta/dt << " Hz/s"<< endl;
 
         for(int j=0; j<N; j++)
         {
