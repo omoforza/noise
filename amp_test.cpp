@@ -25,7 +25,7 @@ int main()
 	{
 		input[i] = amp.ampID(rand()/double(RAND_MAX)-0.5L, dt);	
 		//input[i] = 1.0L*rand()/double(RAND_MAX)*
-		//sin(2.0L*M_PI*3500.0L*dt*i);	
+		//sin(2.0L*acosl(-1.0L)*3500.0L*dt*i);	
 	}
 
 	
