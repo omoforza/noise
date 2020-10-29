@@ -146,11 +146,13 @@ void pdh::ReflIntDynamic(long double vel)
 	cav.reset();
 }
 
-void pdh::ChargeCavity(bool ind)
+void pdh::ChargeCavity(bool in_res)
 {
-	if(ind){cav.SetResFreq(las);}
+	//if in_res = true the resonance frequency is chosen
+	if(in_res){cav.SetResFreq(las);}
 	long double b;
 	b = las.GetBeta();	
+	//the field modulation is turned off
 	las.SetBeta(0.0L);
 	ofstream out;
 	out.open("charge.txt");
@@ -159,10 +161,12 @@ void pdh::ChargeCavity(bool ind)
 	for(int i = 0; i < 100000; i++)
 	{
 		cav.GetNewEF(las);
-		out << cav.GetTime() << "\t" << cav.GetIrefl()<<"\t";
-	        out << cav.GetErefl() << "\t";
-	        out << cav.GetEinc() << "\t";
-	        out << cav.GetEplus() << endl;
+
+		out << cav.GetTime()	<< "\t";
+		out << cav.GetIrefl()	<< "\t";
+	        out << cav.GetErefl()	<< "\t";
+	        out << cav.GetEinc()	<< "\t";
+	        out << cav.GetEplus()	<< endl;
 	}
 	out.close();
 	cav.reset();
