@@ -36,9 +36,6 @@ class pdh
 		//** Results are in "ReflIntD.txt"
 		//** vel is a velocity in Hz/s  (e.g. 590MHz/s)
 		void ReflIntDynamic(long double vel);
-		//** as above but starting from the maximum frequency
-		//** going toward the minimum
-		void ReflIntDynamicB(long double vel);
 
 		//** Reflected intensity as a function of time. The cavity
 		//** is not stabilized during this routine. The only

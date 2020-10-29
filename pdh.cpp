@@ -146,69 +146,6 @@ void pdh::ReflIntDynamic(long double vel)
 	cav.reset();
 }
 
-//vel is a velocity in Hz/s
-void pdh::ReflIntDynamicB(long double vel)
-{
-        cav.AssignLaser(las);
-
-        //output file to store data
-        ofstream out;
-        out.open("ReflIntDB.txt");
-
-        //turn off beta modulation depth        
-        long double b = las.GetBeta();
-        las.SetBeta(0.0L);
-
-        //laser frequency before the routine was called
-        const long double freq0 = las.GetFreq();
-
-        //We will scan frequency around the nearest resonance frequency
-        long double f_res = cav.GetFres();
-
-        //freq boundaries
-        long double f1,f2;
-
-	long double FSR = cav.GetFSR();
-
-        f1 = f_res - FSR*0.004L;
-        f2 = f_res + FSR*0.004L;
-
-
-        //delta frequency
-        long double delta;
-	//to obtain dt i temporarily turn on the laser
-	cav.GetNewEF(las);
-	long double dt = cav.GetDT();
-	//the cavity is reset before the real routine
-	cav.reset();
-
-        //number of samples
-        int N = int (  round((f2 - f1)/vel/dt)  );
-        delta = (f2 - f1)/(1.0L*N);
-
-        //reflected intensity
-        long double ir;
-        electric_field ef;
-
-        for(int j=0; j<N; j++)
-        {
-                las.SetFreq(f2 - delta*j);
-                cav.GetNewEF(las);
-                ef = cav.GetErefl();
-                ir = ef.Intensity();
-                out << setprecision(15);
-		//out << cav.GetTime() << "\t";
-	       	out << (f2-f1)*0.5L - delta*j << "\t" << ir << endl;
-	       	//out << (f2-f1)*0.5 - delta*j << "\t" << ir << endl;
-        }
-        out.close();
-        //laser frequency is set to the original frequency once again
-        las.SetFreq(freq0);
-        las.SetBeta(b);
-
-	cav.reset();
-}
-
 void pdh::ChargeCavity(bool ind)
 {
 	if(ind){cav.SetResFreq(las);}
