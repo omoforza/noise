@@ -36,7 +36,8 @@ electric_field laser::GetField(long double d, long double t)
 	ef.SetA(In);
 	ef.SetPhi(phi);
 	T_OLD = t;
-	PHI_OM_OLD = PHI_OM_OLD + OMEGA*(dt - d/(2.0L*C));
+	PHI_OM_OLD = fmod(PHI_OM_OLD,2.0L*acosl(-1.0L)) 
+		+ OMEGA*(dt - d/(2.0L*C)) - K*d;
 	return ef;
 }
 

@@ -36,9 +36,6 @@ class pdh
 		//** Results are in "ReflIntD.txt"
 		//** vel is a velocity in Hz/s  (e.g. 590MHz/s)
 		void ReflIntDynamic(long double vel);
-		//** as above but starting from the maximum frequency
-		//** going toward the minimum
-		void ReflIntDynamicB(long double vel);
 
 		//** Reflected intensity as a function of time. The cavity
 		//** is not stabilized during this routine. The only
@@ -59,6 +56,10 @@ class pdh
 		//** around the resonance frequency. 
 		//** The values are all saved into "ErrorStatic.txt"
 		void ErrorStatic();
+
+		//** PDH error signal as a function of time fixing the
+		//** laser frequency
+		void ErrorEvolution();
 
 		//SIMULATION ROUTINES
 
@@ -82,7 +83,7 @@ class pdh
 		AmpA pz{50.0L,1.0e-9L};
 		amplifier Ampl{600.0e3L};
 		//error signal amplification factor
-		const long double AA = 1.0e6L;
+		const long double AA = 4.0e7L;
 		//demodulation phase
 		const long double DPhase = -0.5L*PI;
 
