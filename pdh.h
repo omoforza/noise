@@ -75,6 +75,7 @@ class pdh
 		const long double C = 299792458.0L;
 		const long double PI = acos(-1.0L);
 		laser las;
+		long double ef_phot = 0.032L;
 		long double R = 0.99826L;
 		mirror m1{sqrt(R),PI,.0L,.0L,sqrt(1.0L- R),.0L,.1L};
 		mirror m2{sqrt(R),PI,.0L,.0L,sqrt(1.0L- R),.0L,.985L};
@@ -83,7 +84,7 @@ class pdh
 		AmpA pz{50.0L,1.0e-9L};
 		amplifier Ampl{600.0e3L};
 		//error signal amplification factor
-		const long double AA = 4.0e7L;
+		const long double AA = 1.0e8L;
 		//demodulation phase
 		const long double DPhase = -0.5L*PI;
 

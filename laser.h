@@ -10,7 +10,7 @@ class laser
 		// the laser is characterized by a frequency [Hz] and a 
 		// space coordinate  x [m]
 		laser(long double lambda=1064.0e-9L, long double x=0.0L,
-		      long double intensity = 1.0L) :
+		      long double intensity = sqrt(40.0e-3L)) :
 			LAMBDA(lambda), X(x), INTENSITY(intensity)
 		{
 			Init();
@@ -27,6 +27,7 @@ class laser
 		}
 
 		void SetBeta(long double b){beta = b;}
+		void SetInt(long double intensity){INTENSITY = intensity;}
 
 		long double GetIntensity() {return INTENSITY;}
 		
@@ -69,7 +70,7 @@ class laser
 		long double PHI_OM_OLD=0.0L;
 		long double INTENSITY;
 		//phase modulation depth
-		long double beta		= 0.05L;
+		long double beta		= 1.1L;
 		const long double freqM 	= 717.7e3L;
 		const long double omegaM	= 2.0L*PI*freqM;
 };
