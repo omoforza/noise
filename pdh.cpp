@@ -3,6 +3,7 @@
 #include<fstream>
 #include<iostream>
 #include<iomanip>
+#include<fftw3.h>
 
 using std::endl;
 using std::cout;
@@ -305,13 +306,12 @@ void pdh::Sim(bool ampStatus)
 	long double temp = 0.0L;
 	bool ind = false;//turn on or off integration stages in the amp
 
-	ampStatus = true;
 	ind = true;
-	for(int i=0; i<100000; i++)
+	int N = 1000000;
+	long double * input = new long double[N];
+	//las.ErrSig(2000.0L);
+	for(int i=0; i<N; i++)
 	{
-		if(i == 50000){
-			las.ErrSig(2000.0L);
-		}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
@@ -319,6 +319,7 @@ void pdh::Sim(bool ampStatus)
 		out << las.GetFreq()-res_freq << "\t";
 	        intensity = cav.GetIrefl();
 	        out << intensity << "\t";
+		input[i] = intensity;
 	        temp = h1.filter(intensity,dt);
 	        temp = 0.5L*temp*sinl(las.GetOmegaM()*time + DPhase);
 	        temp = Ampl.ampID(temp, dt, ind, false, out);
@@ -328,7 +329,28 @@ void pdh::Sim(bool ampStatus)
 		if(ampStatus) {las.ErrSig(temp);}
 	        out << temp << endl;
 	}
+
 	out.close();
+
+	fftwl_complex* output;
+
+        output = (fftwl_complex *)fftwl_malloc(sizeof(fftwl_complex)*N/2);
+
+        fftwl_plan plan;
+
+        plan = fftwl_plan_dft_r2c_1d(N,input,output,FFTW_ESTIMATE);
+
+        fftwl_execute(plan);
+
+        ofstream fft;
+        out.open("fft.txt");
+
+        for(int i=0; i<N/2; i++){
+                out <<1.0L/(N*dt)*i<<"\t" << (output[i][0]*output[i][0] +
+                        output[i][1]*output[i][1])<< endl;
+        }
+
+	fft.close();
 }
 
 void pdh::ErrorEvolution()
