@@ -219,7 +219,7 @@ void pdh::ErrorSignal(long double vel)
                 out << temp << "\t";
                 temp = Ampl.ampID(temp, dt, ind, true, out);
 		temp = pz.ampID(temp,dt);
-                out << temp << endl;
+                out << AA*temp << endl;
 
         }
         out.close();
@@ -309,9 +309,8 @@ void pdh::Sim(bool ampStatus)
 	ind = true;
 	for(int i=0; i<100000; i++)
 	{
-		if(i == 10000){
-			ind = true; 
-			ampStatus = true;
+		if(i == 50000){
+			las.ErrSig(2000.0L);
 		}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
@@ -325,7 +324,7 @@ void pdh::Sim(bool ampStatus)
 	        temp = Ampl.ampID(temp, dt, ind, false, out);
 		//temp = Ampl.LP(temp,dt);
 		temp = pz.ampID(temp,dt);
-	        temp = -1.0L*temp*AA;
+	        temp = temp*AA;
 		if(ampStatus) {las.ErrSig(temp);}
 	        out << temp << endl;
 	}

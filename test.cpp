@@ -13,7 +13,6 @@ pdh p;
 //p.ReflIntDynamic(500.0e6);
 //p.ReflIntStatic();
 
-
 //p.ErrorSignal(500.0e6);
 //p.ErrorStatic();
 //p.ErrorEvolution();
