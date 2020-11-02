@@ -10,7 +10,7 @@ class laser
 		// the laser is characterized by a frequency [Hz] and a 
 		// space coordinate  x [m]
 		laser(long double lambda=1064.0e-9L, long double x=0.0L,
-		      long double intensity = sqrt(40.0e-3L)) :
+		      long double intensity = 1.0L ) :
 			LAMBDA(lambda), X(x), INTENSITY(intensity)
 		{
 			Init();

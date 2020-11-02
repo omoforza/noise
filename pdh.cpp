@@ -213,7 +213,7 @@ void pdh::ErrorSignal(long double vel)
                 out << delta*j - (f2-f1)*0.5L << "\t";
                 intensity = cav.GetIrefl();
                 out << intensity << "\t";
-		temp = intensity*ef_phot;
+		temp = intensity;
                 temp = h1.filter(temp,dt);
                 temp = 0.5L*temp*sin(las.GetOmegaM()*time + DPhase);
                 out << temp << "\t";
@@ -269,7 +269,7 @@ void pdh::ErrorStatic()
                 time = cav.GetTime();
                 dt = cav.GetDT();
                 intensity = cav.GetIrefl();
-		temp = intensity*ef_phot;
+		temp = intensity;
                 temp = h1.filter(temp,dt);
                 temp = 0.5L*temp*sin(las.GetOmegaM()*time + DPhase);
 		if(k == 9999){
@@ -318,7 +318,7 @@ void pdh::Sim(bool ampStatus)
 	        dt = cav.GetDT();
 	        out << time << "\t";
 		out << las.GetFreq()-res_freq << "\t";
-	        intensity = cav.GetIrefl()*ef_phot;
+	        intensity = cav.GetIrefl();
 	        out << intensity << "\t";
 	        temp = h1.filter(intensity,dt);
 	        temp = 0.5L*temp*sinl(las.GetOmegaM()*time + DPhase);
