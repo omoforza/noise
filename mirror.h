@@ -47,10 +47,16 @@ class mirror
 
 		//Getters
 		long double GetX(){return X;}
+		long double GetV(){return V;}
 		long double GetPhir() {return PHIR;}
 
 		//Setters
 		void SetPhir(long double phi) {PHIR = phi;}
+		void SetX(long double x) {X = x;}
+		void SetMoveType(int a) {MOV_TYPE = a;}
+
+
+		void NewV();
 
 	private:
 		long double R;
@@ -59,7 +65,9 @@ class mirror
 		long double AT;
 		long double AR;
 		long double T;
+		long double V;
 		long double X;
+		int MOV_TYPE = 0;
 };
 
 

@@ -71,8 +71,16 @@ void cavity::GetNewEF(laser & las)
 	//properties of the mirror
 	Erefl = M1.ex_reflect(Einc) + M1.transmit(etemp);
 
+	//update mirror position and evaluation of next DT
+	M1.NewV();
+	M2.NewV();
+	long double dt12 = (M2.GetX() - M1.GetX())/(C-M2.GetV());
+	long double dt21 = (M2.GetX() - M1.GetX())/(C+M1.GetV());
+	M1.SetX(M1.GetX() + M1.GetV()*dt21);
+	M2.SetX(M2.GetX() + M2.GetV()*dt12);
+
 	//update of the time variable
-	DT	= 2.0L*L/C;
+	DT	= dt12 + dt21;
 	RES_T	= RES_T + (DT - DT0); 
 	TIME = DT0*(long double)N_COUNT + RES_T;
 	N_COUNT++;

@@ -30,3 +30,14 @@ electric_field mirror::transmit(electric_field ef)
 	et.SetPhi(ef.GetPhi());	
 	return et;
 }
+
+void mirror::NewV()
+{
+
+	if(MOV_TYPE==0)
+	{V = 0.0L;}
+
+	if(MOV_TYPE==1)
+	{V = 1.0L;}
+
+}
