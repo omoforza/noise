@@ -57,11 +57,11 @@ void cavity::AssignLaser(laser & las)
 
 void cavity::GetNewEF(laser & las)
 {
-	DT	= 2.0L*L/C;
-	RES_T	= RES_T + (DT - DT0); 
+	D	= M1.GetX() - las.GetX();
+	L	= M2.GetX() - M1.GetX();
 	//The new Einc field is defined on the outer layer of
 	//the first mirror
-	Einc = las.GetField((M1.GetX()-las.GetX()) - D0, TIME);
+	Einc = las.GetField(D - D0, TIME);
 
 	//eplus
 	etemp = M2.reflect(Eplus);
@@ -72,6 +72,8 @@ void cavity::GetNewEF(laser & las)
 	Erefl = M1.ex_reflect(Einc) + M1.transmit(etemp);
 
 	//update of the time variable
+	DT	= 2.0L*L/C;
+	RES_T	= RES_T + (DT - DT0); 
 	TIME = DT0*(long double)N_COUNT + RES_T;
 	N_COUNT++;
 }
