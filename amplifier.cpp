@@ -44,7 +44,6 @@ vtemp = AA.ampID(Vin,dt);
 if(WO){out<< vtemp << "\t";}
 vtemp = BB.ampID(vtemp,dt);
 if(WO){out<< vtemp << "\t";}
-/*
 //integrator op-amp
 if(ind){
 vtemp = CC.ampID(vtemp,dt);
@@ -58,7 +57,6 @@ if(WO){out<< vtemp << "\t";}
 vtemp = GG.ampID(vtemp,dt);
 if(WO){out<< vtemp << endl;}
 }
-*/
 return vtemp;
 }
 

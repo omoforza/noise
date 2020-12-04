@@ -312,6 +312,7 @@ void pdh::Sim(bool ampStatus)
 	//las.ErrSig(2000.0L);
 	for(int i=0; i<N; i++)
 	{
+		if(i==500000) {las.ErrSig(10000.0);}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
@@ -323,7 +324,6 @@ void pdh::Sim(bool ampStatus)
 	        temp = h1.filter(intensity,dt);
 	        temp = 0.5L*temp*sinl(las.GetOmegaM()*time + DPhase);
 	        temp = Ampl.ampID(temp, dt, ind, false, out);
-		//temp = Ampl.LP(temp,dt);
 		temp = pz.ampID(temp,dt);
 	        temp = temp*AA;
 		if(ampStatus) {las.ErrSig(temp);}
