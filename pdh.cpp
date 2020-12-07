@@ -98,8 +98,8 @@ void pdh::ReflIntDynamic(long double vel)
 
 	long double FSR = cav.GetFSR();
 
-        f1 = f_res - FSR*0.004L;
-        f2 = f_res + FSR*0.004L;
+        f1 = f_res - FSR*0.04L;
+        f2 = f_res + FSR*0.04L;
 
 
         //delta frequency
@@ -186,8 +186,8 @@ void pdh::ErrorSignal(long double vel)
         //boundaries frequencies
         long double f1,f2;
 
-        f1 = f_res - FSR*0.008L;
-        f2 = f_res + FSR*0.008L;
+        f1 = f_res - FSR*0.04L;
+        f2 = f_res + FSR*0.04L;
 
 	//to obtain dt I temporarily turn on the laser
 	cav.GetNewEF(las);
@@ -308,11 +308,12 @@ void pdh::Sim(bool ampStatus)
 
 	ind = true;
 	int N = 1000000;
-	long double * input = new long double[N];
+	int taglio = 300000;
+	long double * input = new long double[N-taglio];
 	//las.ErrSig(2000.0L);
 	for(int i=0; i<N; i++)
 	{
-		if(i==500000) {las.ErrSig(10000.0);}
+		if(i==0) {las.ErrSig(37000.0L);}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
@@ -320,7 +321,7 @@ void pdh::Sim(bool ampStatus)
 		out << las.GetFreq()-res_freq << "\t";
 	        intensity = cav.GetIrefl();
 	        out << intensity << "\t";
-		input[i] = intensity;
+		if(i>=taglio){	input[i-taglio] = intensity;}
 	        temp = h1.filter(intensity,dt);
 	        temp = 0.5L*temp*sinl(las.GetOmegaM()*time + DPhase);
 	        temp = Ampl.ampID(temp, dt, ind, false, out);
@@ -334,19 +335,20 @@ void pdh::Sim(bool ampStatus)
 
 	fftwl_complex* output;
 
-        output = (fftwl_complex *)fftwl_malloc(sizeof(fftwl_complex)*N/2);
+        output = (fftwl_complex *)fftwl_malloc(sizeof(fftwl_complex)*(N-taglio)/2);
 
         fftwl_plan plan;
 
-        plan = fftwl_plan_dft_r2c_1d(N,input,output,FFTW_ESTIMATE);
+        plan = fftwl_plan_dft_r2c_1d(N-taglio,input,output,FFTW_ESTIMATE);
 
         fftwl_execute(plan);
 
         ofstream fft;
         out.open("fft.txt");
 
-        for(int i=0; i<N/2; i++){
-                out <<1.0L/(N*dt)*i<<"\t" << (output[i][0]*output[i][0] +
+        for(int i=0; i<(N-taglio)/2; i++){
+                out <<1.0L/((N-taglio)*dt)*i<<"\t" 
+		    << (output[i][0]*output[i][0] +
                         output[i][1]*output[i][1])<< endl;
         }
 
