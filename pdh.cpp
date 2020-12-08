@@ -307,13 +307,12 @@ void pdh::Sim(bool ampStatus)
 	bool ind = false;//turn on or off integration stages in the amp
 
 	ind = true;
-	int N = 1000000;
-	int taglio = 300000;
+	int N = 10000000;
+	int taglio = 200000;
 	long double * input = new long double[N-taglio];
-	//las.ErrSig(2000.0L);
+	las.ErrSig(170000.0L);
 	for(int i=0; i<N; i++)
 	{
-		if(i==0) {las.ErrSig(37000.0L);}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
@@ -349,7 +348,8 @@ void pdh::Sim(bool ampStatus)
         for(int i=0; i<(N-taglio)/2; i++){
                 out <<1.0L/((N-taglio)*dt)*i<<"\t" 
 		    << (output[i][0]*output[i][0] +
-                        output[i][1]*output[i][1])<< endl;
+                        output[i][1]*output[i][1])
+		    /pow(1.0*(N-taglio),2.0)<< endl;
         }
 
 	fft.close();
