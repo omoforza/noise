@@ -308,11 +308,12 @@ void pdh::Sim(bool ampStatus)
 
 	ind = true;
 	int N = 10000000;
-	int taglio = 200000;
+	int taglio = 300000;
 	long double * input = new long double[N-taglio];
-	las.ErrSig(170000.0L);
+	las.ErrSig(500000.0L);
 	for(int i=0; i<N; i++)
 	{
+		//if(i==500000){las.ErrSig(2.0e4L);}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
