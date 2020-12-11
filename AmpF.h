@@ -5,14 +5,14 @@ class AmpF
 {
 	public:
 		AmpF(
-		long double r1 = 4.7e3,
-		long double r2 = 100.0,//5.6 
-		long double r3 = 1.0e6,
-		long double r = 0.5, 
-		long double rout = 1000.0, 
-		long double cout = 3.0e-12, 
-		long double c1 = 1.0e-6, 
-		long double g = 600.0e3
+		long double r1 = 4.7e3L,
+		long double r2 = 5.6L, 
+		long double r3 = 1.0e6L,
+		long double r = 0.5L, 
+		long double rout = 1000.0L, 
+		long double cout = 3.0e-12L, 
+		long double c1 = 1.0e-6L, 
+		long double g = 600.0e3L
 		):
 
 		R1(r1), R2(r2), R3(r3), R(r), Rout(rout), Cout(cout),

@@ -3,6 +3,7 @@
 #include<fstream>
 #include<iostream>
 #include<iomanip>
+#include<fftw3.h>
 
 using std::endl;
 using std::cout;
@@ -97,8 +98,8 @@ void pdh::ReflIntDynamic(long double vel)
 
 	long double FSR = cav.GetFSR();
 
-        f1 = f_res - FSR*0.004L;
-        f2 = f_res + FSR*0.004L;
+        f1 = f_res - FSR*0.04L;
+        f2 = f_res + FSR*0.04L;
 
 
         //delta frequency
@@ -185,8 +186,8 @@ void pdh::ErrorSignal(long double vel)
         //boundaries frequencies
         long double f1,f2;
 
-        f1 = f_res - FSR*0.008L;
-        f2 = f_res + FSR*0.008L;
+        f1 = f_res - FSR*0.04L;
+        f2 = f_res + FSR*0.04L;
 
 	//to obtain dt I temporarily turn on the laser
 	cav.GetNewEF(las);
@@ -215,11 +216,11 @@ void pdh::ErrorSignal(long double vel)
                 out << intensity << "\t";
 		temp = intensity;
                 temp = h1.filter(temp,dt);
-                temp = temp*sin(las.GetOmegaM()*time + DPhase);
+                temp = 0.5L*temp*sin(las.GetOmegaM()*time + DPhase);
                 out << temp << "\t";
                 temp = Ampl.ampID(temp, dt, ind, true, out);
 		temp = pz.ampID(temp,dt);
-                out << temp << endl;
+                out << AA*temp << endl;
 
         }
         out.close();
@@ -271,7 +272,7 @@ void pdh::ErrorStatic()
                 intensity = cav.GetIrefl();
 		temp = intensity;
                 temp = h1.filter(temp,dt);
-                temp = temp*sin(las.GetOmegaM()*time + DPhase);
+                temp = 0.5L*temp*sin(las.GetOmegaM()*time + DPhase);
 		if(k == 9999){
 			write = true;
                 	out << delta*j - (f2-f1)*0.5L << "\t";
@@ -305,14 +306,14 @@ void pdh::Sim(bool ampStatus)
 	long double temp = 0.0L;
 	bool ind = false;//turn on or off integration stages in the amp
 
-	ampStatus = true;
 	ind = true;
-	for(int i=0; i<100000; i++)
+	int N = 10000000;
+	int taglio = 300000;
+	long double * input = new long double[N-taglio];
+	las.ErrSig(500000.0L);
+	for(int i=0; i<N; i++)
 	{
-		if(i == 10000){
-			ind = true; 
-			ampStatus = true;
-		}
+		//if(i==500000){las.ErrSig(2.0e4L);}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
@@ -320,16 +321,39 @@ void pdh::Sim(bool ampStatus)
 		out << las.GetFreq()-res_freq << "\t";
 	        intensity = cav.GetIrefl();
 	        out << intensity << "\t";
+		if(i>=taglio){	input[i-taglio] = intensity;}
 	        temp = h1.filter(intensity,dt);
-	        temp = temp*sin(las.GetOmegaM()*time + DPhase);
+	        temp = 0.5L*temp*sinl(las.GetOmegaM()*time + DPhase);
 	        temp = Ampl.ampID(temp, dt, ind, false, out);
-		//temp = Ampl.LP(temp,dt);
 		temp = pz.ampID(temp,dt);
-	        temp = -1.0L*temp*AA;
+	        temp = temp*AA;
 		if(ampStatus) {las.ErrSig(temp);}
 	        out << temp << endl;
 	}
+
 	out.close();
+
+	fftwl_complex* output;
+
+        output = (fftwl_complex *)fftwl_malloc(sizeof(fftwl_complex)*(N-taglio)/2);
+
+        fftwl_plan plan;
+
+        plan = fftwl_plan_dft_r2c_1d(N-taglio,input,output,FFTW_ESTIMATE);
+
+        fftwl_execute(plan);
+
+        ofstream fft;
+        out.open("fft.txt");
+
+        for(int i=0; i<(N-taglio)/2; i++){
+                out <<1.0L/((N-taglio)*dt)*i<<"\t" 
+		    << (output[i][0]*output[i][0] +
+                        output[i][1]*output[i][1])
+		    /pow(1.0*(N-taglio),2.0)<< endl;
+        }
+
+	fft.close();
 }
 
 void pdh::ErrorEvolution()

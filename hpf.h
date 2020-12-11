@@ -18,6 +18,12 @@ class hpf
 		//this function act as an high pass filter
 		//on the intensity current signal from the photodiode
 		long double filter(long double, long double);
+		void reset()
+		{
+			V_old = 0.0;
+                        I_old = 0.0;
+                        Vin   = 0.0;
+		}
 	private:
 		long double L;
 		long double R;

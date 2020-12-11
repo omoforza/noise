@@ -33,7 +33,6 @@ return vtemp;
 
 long double amplifier::ampID(long double Vin, long double dt, bool ind, bool WO, ofstream  & out)
 {
-
 //"amp_data.txt" contains the signal values after each amplification
 //stage. It can be enabled or disabled (false) using the bool variable,
 //(W)rite(O)utput WO.	

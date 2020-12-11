@@ -61,6 +61,7 @@ class cavity
 		//distance at equilibrium between laser and first mirror
 		//of the cavity
 		long double D0 = 0.0L;
+		long double D  = 0.0L;
 
 		//class initialization function
 		void Init();

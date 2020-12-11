@@ -6,8 +6,8 @@ class AmpA
 	public:
 		//resistance and capacity value in Ohm and Fahrad
 		AmpA(
-		long double r1 = 1000.0,
-		long double c1 = 100.0e-12
+		long double r1 = 1.0e3L,
+		long double c1 = 9.0e-9L
 		):
 			R1(r1), C1(c1)
 		{
