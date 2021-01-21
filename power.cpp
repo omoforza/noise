@@ -17,7 +17,7 @@ double c = 299792458;
 double fsr = c/(2.0*L);
 
 double omega = 2.0*acos(-1.0)*1.0/(2.0*(L/c));
-double om_mod = 2.0*acos(-1.0)*717.7e3;//*12.0e6;
+double om_mod = 2.0*acos(-1.0)*12.0e6;//717.7e3;//*12.0e6;
 double beta = 1.1;
 double E0 = 1.0;
 
@@ -25,7 +25,7 @@ ofstream out;
 out.open("power.txt");
 
 double freq = 0.0;
-double FMAX = 4.0e6;//50.0e6;
+double FMAX = 50.0e6;//4.0e6;//50.0e6;
 int N = 100000;
 double df = 2.0*FMAX/(1.0*N);
 for(int i=0; i<N; i++){

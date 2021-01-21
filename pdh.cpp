@@ -4,11 +4,9 @@
 #include<iostream>
 #include<iomanip>
 #include<fftw3.h>
+#include<random>
 
-using std::endl;
-using std::cout;
-using std::ofstream;
-using std::setprecision;
+using namespace std;
 
 void pdh::ReflIntStatic()
 {
@@ -33,8 +31,8 @@ void pdh::ReflIntStatic()
 
 	long double FSR = cav.GetFSR();
 
-        f1 = f_res - FSR*0.004L;
-        f2 = f_res + FSR*0.004L;
+        f1 = f_res - 5.0e6;
+        f2 = f_res + 5.0e6L;
 
         //number of samples
         int N = 1000;
@@ -292,6 +290,7 @@ void pdh::ErrorStatic()
 
 void pdh::Sim(bool ampStatus)
 {
+	normal_distribution<long double> gaus(MEAN,STDV);
 	ofstream out;
 	out.open("data.txt");
 	out << setprecision(16);
@@ -307,13 +306,13 @@ void pdh::Sim(bool ampStatus)
 	bool ind = false;//turn on or off integration stages in the amp
 
 	ind = true;
-	int N = 10000000;
+	int N = 1000000;
 	int taglio = 300000;
 	long double * input = new long double[N-taglio];
-	las.ErrSig(500000.0L);
+	//las.ErrSig(500000.0L);
 	for(int i=0; i<N; i++)
 	{
-		//if(i==500000){las.ErrSig(2.0e4L);}
+		las.ErrSig(gaus(generator));
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
