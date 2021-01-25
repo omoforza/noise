@@ -77,11 +77,11 @@ class pdh
 		const long double C = 299792458.0L;
 		const long double PI = acos(-1.0L);
 		laser las;
-		long double R = 0.956L;//0.956L;
+		long double R = 0.999L;//0.956L;
 		long double R1 = R;
 		long double R2 = R;
 		mirror m1{sqrt(R1),PI,.0L,.0L,sqrt(1.0L- R1),.0L,.1L};
-		mirror m2{sqrt(R2),PI,.0L,.0L,sqrt(1.0L- R2),.0L,.97L};
+		mirror m2{sqrt(R2),PI,.0L,.0L,sqrt(1.0L- R2),.0L,1.1L};
 		cavity cav{m1,m2};
 		hpf h1;
 		AmpA pz{50.0L,1.0e-9L};

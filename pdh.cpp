@@ -96,8 +96,8 @@ void pdh::ReflIntDynamic(long double vel)
 
 	long double FSR = cav.GetFSR();
 
-        f1 = f_res - FSR*0.04L;
-        f2 = f_res + FSR*0.04L;
+        f1 = f_res - FSR*0.004L;
+        f2 = f_res + FSR*0.004L;
 
 
         //delta frequency
