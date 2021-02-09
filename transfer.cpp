@@ -138,8 +138,8 @@ int main()
 			integral2(2.0*PI*nu)*
 			integral3(2.0*PI*nu)*
 			fblock(2.0*PI*nu)*
-			pz(2.0*PI*nu)*
-			5.0e6
+			pz(2.0*PI*nu)
+			*0.02
 			));
 
 		out<<"\t"<<180.0/acos(-1.0)*(arg(
@@ -151,8 +151,8 @@ int main()
                         integral2(2.0*PI*nu)*
                         integral3(2.0*PI*nu)*
                         fblock(2.0*PI*nu)*
-                        pz(2.0*PI*nu)*
-                        5.0e6
+                        pz(2.0*PI*nu)
+			*0.02
                         ));
 
 		out<<"\t"<<20.0*log10(abs(
@@ -165,8 +165,8 @@ int main()
                         integral2(2.0*PI*nu)*
                         integral3(2.0*PI*nu)*
                         fblock2(2.0*PI*nu)*
-                        pz(2.0*PI*nu)*
-                        5.0e6
+                        pz(2.0*PI*nu)
+			*0.02
                         ));
 
                 out<<"\t"<<180.0/acos(-1.0)*(arg(
@@ -179,8 +179,8 @@ int main()
                         integral2(2.0*PI*nu)*
                         integral3(2.0*PI*nu)*
                         fblock2(2.0*PI*nu)*
-                        pz(2.0*PI*nu)*
-                        5.0e6
+                        pz(2.0*PI*nu)
+			*0.02
                         ));
 
 		out<< endl;

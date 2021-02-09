@@ -10,7 +10,7 @@ pdh p;
 
 
 //da 500 a 10000 (oscilla)
-p.ReflIntDynamic(14320.0e6);
+//p.ReflIntDynamic(14320.0e6);
 //p.ReflIntStatic();
 
 //p.ErrorSignal(500.0e6);
@@ -18,7 +18,7 @@ p.ReflIntDynamic(14320.0e6);
 //p.ErrorEvolution();
 
 
-//p.Sim(false);
+p.Sim(true);
 
 return 0;
 }

@@ -309,10 +309,10 @@ void pdh::Sim(bool ampStatus)
 	int N = 1000000;
 	int taglio = 300000;
 	long double * input = new long double[N-taglio];
-	//las.ErrSig(500000.0L);
 	for(int i=0; i<N; i++)
 	{
-		las.ErrSig(gaus(generator));
+	//	las.ErrSig(gaus(generator));
+	//	if(i==500000){las.ErrSig(2000.0);}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
@@ -322,7 +322,7 @@ void pdh::Sim(bool ampStatus)
 	        out << intensity << "\t";
 		if(i>=taglio){	input[i-taglio] = intensity;}
 	        temp = h1.filter(intensity,dt);
-	        temp = 0.5L*temp*sinl(las.GetOmegaM()*time + DPhase);
+		temp = 0.5L*temp*sinl(las.GetOmegaM()*time + DPhase);
 	        temp = Ampl.ampID(temp, dt, ind, false, out);
 		temp = pz.ampID(temp,dt);
 	        temp = temp*AA;
