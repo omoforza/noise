@@ -306,14 +306,14 @@ void pdh::Sim(bool ampStatus)
 	bool ind = false;//turn on or off integration stages in the amp
 
 	ind = false;
-	int N = 500000;
+	int N = 1000000;
 	int taglio = 300000;
 	long double * input = new long double[N-taglio];
 	for(int i=0; i<N; i++)
 	{
 		if(i==25000){ind=true;}//PI activation
 	//	las.ErrSig(gaus(generator));
-	//	if(i==500000){las.ErrSig(2000.0);}
+		if(i==500000){las.ErrSig(2000.0);}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();

@@ -84,7 +84,7 @@ class pdh
 		mirror m2{sqrt(R2),PI,.0L,.0L,sqrt(1.0L- R2),.0L,0.97L};
 		cavity cav{m1,m2};
 		hpf h1;
-		AmpA pz{50.0L,1.0e-9L};
+		AmpA pz{1600.0L,1.0e-9L};
 		amplifier Ampl{600.0e3L};
 		//error signal amplification factor
 		const long double AA = -1.0e1L;
