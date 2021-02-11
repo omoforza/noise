@@ -35,7 +35,7 @@ complex<double> integral1(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 4.7e3;
 	double R2 = 4.7e3;
-	double C  = 5.6e-9;
+	double C  = 8.2e-9;
 	return - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
@@ -43,7 +43,7 @@ complex<double> integral2(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 4.7e3;
 	double R2 = 4.7e3;
-	double C  = 5.6e-9;
+	double C  = 8.2e-9;
 	return  - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
@@ -51,7 +51,7 @@ complex<double> integral3(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 22.0e3;
 	double R2 = 22.0e3;
-	double C  = 1.2e-9;
+	double C  = 8.2e-9;
 	return - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
@@ -131,6 +131,7 @@ int main()
 
 		out<<"\t"<<20.0*log10(abs(
 			cav(2.0*PI*nu)*
+			hpf(2.0*PI*nu)*
 			-0.5*
 			lpf(2.0*PI*nu)*
 			-22.0*
@@ -144,6 +145,7 @@ int main()
 
 		out<<"\t"<<180.0/acos(-1.0)*(arg(
                         cav(2.0*PI*nu)*
+			hpf(2.0*PI*nu)*
                         -0.5*
                         lpf(2.0*PI*nu)*
 			-22.0*

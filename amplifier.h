@@ -39,9 +39,9 @@ class amplifier
 		*/
 		AmpA AA{1.0e3L,9.0e-9L};
                 AmpB BB{1000.0L,22.0e3L,0.5L,4.7e3L,3.0e-12L,G};
-                AmpC CC{4.7e3L,4.7e3L,0.5L,4.7e3L,3.0e-12L, 4.7e-9L,G};
-                AmpC DD{4.7e3L,4.7e3L,0.5L,22.0e3L,3.0e-12L,5.6e-9L,G};
-                AmpC EE{22.0e3L,22.0e3L,0.5L,1.0L/(1.0L/4.7e3L+1.0L/1.0e6L),3.0e-12L,2.2e-9L,G};
+                AmpC CC{4.7e3L,4.7e3L,0.5L,4.7e3L,3.0e-12L, 8.2e-9L,G};
+                AmpC DD{4.7e3L,4.7e3L,0.5L,22.0e3L,3.0e-12L,8.2e-9L,G};
+                AmpC EE{22.0e3L,22.0e3L,0.5L,1.0L/(1.0L/4.7e3L+1.0L/1.0e6L),3.0e-12L,8.2e-9L,G};
                 AmpF FF{4.7e3L,4.0L,1.0e6L,0.5L,1000.0L,3.0e-12L,1.0e-6L,G};
                 AmpB GG{1000.0L,1000.0L,0.5L,4.7e3L,3.0e-12L,G};
 
