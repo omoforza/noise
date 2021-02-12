@@ -52,11 +52,12 @@ vtemp = DD.ampID(vtemp,dt);
 if(WO){out<< vtemp << "\t";}
 vtemp = EE.ampID(vtemp,dt);
 if(WO){out<< vtemp << "\t";}
+}
+if(!ind){vtemp = -1.0L*vtemp;}
 vtemp = FF.ampID(vtemp,dt);
 if(WO){out<< vtemp << "\t";}
 vtemp = GG.ampID(vtemp,dt);
 if(WO){out<< vtemp << endl;}
-}
 return vtemp;
 }
 

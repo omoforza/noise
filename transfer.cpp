@@ -6,8 +6,8 @@ using namespace std;
 
 complex<double> cav(double omega){
 
-	double R = 0.999;
-	double L = 1.0;
+	double R = 0.99;
+	double L = 0.87;
 	const double c = 299792458.0;
 	double T=L/c;
 	complex<double> I(0.0,1.0);
@@ -16,15 +16,15 @@ complex<double> cav(double omega){
 }
 
 complex<double> lpf(double omega){
-	double R = 1100.0;
-	double C = 1.0e-9;
+	double R = 1000.0;
+	double C = 9.0e-9;
 	complex<double> I(0.0,1.0);
 
 	return 1.0/(1.0+R*C*I*omega);
 }
 
 complex<double> pz(double omega){
-	double R = 1.6e3;
+	double R = 1600.0;
 	double C = 1.0e-9;
 	complex<double> I(0.0,1.0);
 
@@ -35,7 +35,7 @@ complex<double> integral1(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 4.7e3;
 	double R2 = 4.7e3;
-	double C  = 5.6e-9;
+	double C  = 8.2e-9;
 	return - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
@@ -43,7 +43,7 @@ complex<double> integral2(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 4.7e3;
 	double R2 = 4.7e3;
-	double C  = 5.6e-9;
+	double C  = 8.2e-9;
 	return  - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
@@ -51,14 +51,14 @@ complex<double> integral3(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 22.0e3;
 	double R2 = 22.0e3;
-	double C  = 1.2e-9;
+	double C  = 8.2e-9;
 	return - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
 complex<double> fblock(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 4.7e3;
-	double R2 = 5.6;
+	double R2 = 4.0;
 	double R3 = 1.0e6;
 	double C  = 1.0e-6;
 
@@ -131,6 +131,7 @@ int main()
 
 		out<<"\t"<<20.0*log10(abs(
 			cav(2.0*PI*nu)*
+			hpf(2.0*PI*nu)*
 			-0.5*
 			lpf(2.0*PI*nu)*
 			-22.0*
@@ -139,11 +140,12 @@ int main()
 			integral3(2.0*PI*nu)*
 			fblock(2.0*PI*nu)*
 			pz(2.0*PI*nu)
-			*0.02
+			*5.0
 			));
 
 		out<<"\t"<<180.0/acos(-1.0)*(arg(
                         cav(2.0*PI*nu)*
+			hpf(2.0*PI*nu)*
                         -0.5*
                         lpf(2.0*PI*nu)*
 			-22.0*
@@ -152,35 +154,7 @@ int main()
                         integral3(2.0*PI*nu)*
                         fblock(2.0*PI*nu)*
                         pz(2.0*PI*nu)
-			*0.02
-                        ));
-
-		out<<"\t"<<20.0*log10(abs(
-                        cav(2.0*PI*nu)*
-			hpf(2.0*PI*nu)*
-                        -0.5*
-                        lpf(2.0*PI*nu)*
-			-22.0*
-                        integral1(2.0*PI*nu)*
-                        integral2(2.0*PI*nu)*
-                        integral3(2.0*PI*nu)*
-                        fblock2(2.0*PI*nu)*
-                        pz(2.0*PI*nu)
-			*0.02
-                        ));
-
-                out<<"\t"<<180.0/acos(-1.0)*(arg(
-                        cav(2.0*PI*nu)*
-			hpf(2.0*PI*nu)*
-                        -0.5*
-                        lpf(2.0*PI*nu)*
-			-22.0*
-                        integral1(2.0*PI*nu)*
-                        integral2(2.0*PI*nu)*
-                        integral3(2.0*PI*nu)*
-                        fblock2(2.0*PI*nu)*
-                        pz(2.0*PI*nu)
-			*0.02
+			*5.0
                         ));
 
 		out<< endl;
