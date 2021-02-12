@@ -311,7 +311,7 @@ void pdh::Sim(bool ampStatus)
 	long double * input = new long double[N-taglio];
 	for(int i=0; i<N; i++)
 	{
-		if(i==25000){ind=true;}//PI activation
+		if(i==0){ind=true;}//PI activation
 	//	las.ErrSig(gaus(generator));
 		if(i==500000){las.ErrSig(2000.0);}
 	        cav.GetNewEF(las);
