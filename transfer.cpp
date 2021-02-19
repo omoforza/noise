@@ -16,8 +16,8 @@ complex<double> cav(double omega){
 }
 
 complex<double> lpf(double omega){
-	double R = 1000.0;
-	double C = 9.0e-9;
+	double R = 4000.0;
+	double C = 2.0e-9;
 	complex<double> I(0.0,1.0);
 
 	return 1.0/(1.0+R*C*I*omega);
@@ -35,7 +35,7 @@ complex<double> integral1(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 4.7e3;
 	double R2 = 4.7e3;
-	double C  = 8.2e-9;
+	double C  = 40.0e-9;
 	return - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
@@ -43,7 +43,7 @@ complex<double> integral2(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 4.7e3;
 	double R2 = 4.7e3;
-	double C  = 8.2e-9;
+	double C  = 40.0e-9;
 	return  - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
@@ -51,7 +51,7 @@ complex<double> integral3(double omega){
 	complex<double> I(0.0,1.0);
 	double R1 = 22.0e3;
 	double R2 = 22.0e3;
-	double C  = 8.2e-9;
+	double C  = 40.0e-9;
 	return - R2/R1 - 1.0/(R1*C*I*omega); 
 }
 
@@ -60,7 +60,7 @@ complex<double> fblock(double omega){
 	double R1 = 4.7e3;
 	double R2 = 4.0;
 	double R3 = 1.0e6;
-	double C  = 1.0e-6;
+	double C  = 145.0e-9;
 
 	return -R2/R1 - R3/R1/(1.0+R3*C*I*omega);
 }
@@ -123,24 +123,23 @@ int main()
 		out<<"\t"<<20.0*log10((abs(integral2(2.0*PI*nu))));
 		out<<"\t"<<180.0/acos(-1.0)*arg(integral2(2.0*PI*nu));
 
-		out<<"\t"<<20.0*log10(abs(fblock2(2.0*PI*nu)));
-		out<<"\t"<<180.0/acos(-1.0)*arg(fblock2(2.0*PI*nu));
+		out<<"\t"<<20.0*log10(abs(fblock(2.0*PI*nu)));
+		out<<"\t"<<180.0/acos(-1.0)*arg(fblock(2.0*PI*nu));
 
-		out<<"\t"<<20.0*log10(abs(hpf(2.0*PI*nu)));
-		out<<"\t"<<180.0/acos(-1.0)*arg(hpf(2.0*PI*nu));
+		out<<"\t"<<20.0*log10(abs(lpf(2.0*PI*nu)));
+		out<<"\t"<<180.0/acos(-1.0)*arg(lpf(2.0*PI*nu));
 
 		out<<"\t"<<20.0*log10(abs(
 			cav(2.0*PI*nu)*
 			hpf(2.0*PI*nu)*
 			-0.5*
 			lpf(2.0*PI*nu)*
-			-22.0*
+			-14.6*
 			integral1(2.0*PI*nu)*
 			integral2(2.0*PI*nu)*
 			integral3(2.0*PI*nu)*
 			fblock(2.0*PI*nu)*
 			pz(2.0*PI*nu)
-			*5.0
 			));
 
 		out<<"\t"<<180.0/acos(-1.0)*(arg(
@@ -148,13 +147,12 @@ int main()
 			hpf(2.0*PI*nu)*
                         -0.5*
                         lpf(2.0*PI*nu)*
-			-22.0*
+			-14.6*
                         integral1(2.0*PI*nu)*
                         integral2(2.0*PI*nu)*
                         integral3(2.0*PI*nu)*
                         fblock(2.0*PI*nu)*
                         pz(2.0*PI*nu)
-			*5.0
                         ));
 
 		out<< endl;

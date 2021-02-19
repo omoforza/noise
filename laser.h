@@ -71,7 +71,7 @@ class laser
 		long double INTENSITY;
 		//phase modulation depth
 		long double beta		= 1.1L;
-		const long double freqM 	= 717.7e3L;
+		const long double freqM 	=2.0e6;// 717.7e3L;
 		const long double omegaM	= 2.0L*PI*freqM;
 };
 

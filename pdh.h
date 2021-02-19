@@ -89,7 +89,7 @@ class pdh
 		//error signal amplification factor
 		const long double AA = -0.8e1L;
 		//demodulation phase
-		const long double DPhase = -0.5L*PI;
+		const long double DPhase = PI;
 
 		default_random_engine generator;
 		long double STDV = 40.0L;

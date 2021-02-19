@@ -184,8 +184,8 @@ void pdh::ErrorSignal(long double vel)
         //boundaries frequencies
         long double f1,f2;
 
-        f1 = f_res - FSR*0.04L;
-        f2 = f_res + FSR*0.04L;
+        f1 = f_res - 7.0e6L;
+        f2 = f_res + 7.0e6L;
 
 	//to obtain dt I temporarily turn on the laser
 	cav.GetNewEF(las);
@@ -242,8 +242,8 @@ void pdh::ErrorStatic()
         //boundaries frequencies
         long double f1,f2;
 
-        f1 = f_res - FSR*0.008L;
-        f2 = f_res + FSR*0.008L;
+        f1 = f_res - FSR*0.04L;
+        f2 = f_res + FSR*0.04L;
 
         //number of samples
         int N = 1000;
@@ -279,7 +279,7 @@ void pdh::ErrorStatic()
 		}
                 temp = Ampl.ampID(temp, dt, ind, write, out);
 		}//end k for
-		out << endl;
+		out << 1 << endl;
 		Ampl.RESET();
 
         }//end of j for
@@ -306,14 +306,14 @@ void pdh::Sim(bool ampStatus)
 	bool ind = false;//turn on or off integration stages in the amp
 
 	ind = false;
-	int N = 1000000;
-	int taglio = 300000;
+	int N = 10000000;
+	int taglio = 100000;
 	long double * input = new long double[N-taglio];
 	for(int i=0; i<N; i++)
 	{
 		if(i==0){ind=true;}//PI activation
 	//	las.ErrSig(gaus(generator));
-		if(i==500000){las.ErrSig(2000.0);}
+		if(i==500000){las.ErrSig(500.0);}
 	        cav.GetNewEF(las);
 	        time = cav.GetTime();
 	        dt = cav.GetDT();
