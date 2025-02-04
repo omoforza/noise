@@ -1,0 +1,6 @@
+*.txt
+build/
+scripts/
+*.x
+*.o
+*.sh
